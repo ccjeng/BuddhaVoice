@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">新仏の声(オフライン)</string>
+    <string name="main_title">仏の声Buddha Voice</string>
+    <string name="exit_title">終了</string>
+    <string name="stop_title">再生を停止</string>
+    <string name="about_title">について</string>
+    <string name="ok_label">OK</string>
+    <string name="loading">Loading</string>
+    <string name="playing_title">今すぐ再生 ..</string>
+    <string name="about_subject">について仏の声 Buddha Voice</string>
+    <string name="no_connection">Network Error</string>
+	<string name="about_text">仏ザブッダは、ハンドヘルド機、仏教の真言仏教のマントラマルチメディアデータベースのソースであり、広く流通し、すべての生き物には、このメリットのダルマレルムに戻るには、希望を歓迎した。</string>
+	<string name="tab_online">Online version</string>
+	<string name="tab_offline">Offline version</string>
+	<string name="preference">配置</string>
+	<string name="pref_lang">言語設定</string>
+	<string name="pref_lang_summary">セットアップ言語 (再起動が必要です)</string>
+	<string-array name="pref_lang_item">
+		<item>英語</item>	
+		<item>中国語(繁体字)</item>
+		<item>中国語(簡体字)</item>
+		<item>日本語</item>
+	</string-array>
+	<string-array name="pref_lang_code">
+		<item>en</item>
+		<item>zh_TW</item>
+		<item>zh_CN</item>	
+		<item>ja</item>
+	</string-array>
+	<string name="pref_online">Online version Server Setting</string>
+	<string name="pref_online_summary">Setup online version music server (Restart required)</string>
+	<string-array name="pref_online_item">	
+		<item>Google (For China user)</item>
+		<item>Dropbox(More stable and fast)</item>
+	</string-array>
+	<string-array name="pref_online_code">
+		<item>google</item>
+		<item>dropbox</item>
+	</string-array>		
+</resources>

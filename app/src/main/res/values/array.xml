@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string-array name="itemSongs">
+        <item>Om mani padme hum(六字大明咒)</item>
+        <item>Om mani padme hum by Karmapa(六字大明咒)</item>
+        <item>Amitābha(阿彌陀佛心咒)</item>
+        <item>Karmapa Chenno(大寶法王心咒)</item>
+        <item>Wen Shu(文殊心咒)</item>
+        <item>Buddhistdoor(普巴金剛心咒)</item>
+        <item>Tara Green(綠度母心咒)</item>
+        <item>Parnashavari(葉衣佛母)</item>
+        <item>Vajrasattva(金剛薩埵心咒)</item>
+		<item>Medicine Buddha Mantra(藥師心咒)</item>
+		<item>Ksitigarbha(滅定業真言)</item>
+		<item>Amitabha(阿彌陀佛)</item>
+    </string-array>
+    
+    <string-array name="itemSongs1">
+		<item>Heart Sutra 1</item>
+		<item>Heart Sutra 2</item>
+		<item>Great Compassion Mantra Verses 1</item>
+		<item>Great Compassion Mantra Verses 2</item>
+		<item>Medicine Buddha Mantra(藥師心咒)</item>
+		<item>一切如来心秘密全身舍利宝箧印陀罗尼咒</item>
+    </string-array>
+    
+    <string-array name="itemSongsInfo">
+        <item>Om mani padme hum is a mantra particularly associated with the four-armed Shadakshari form of Avalokiteshvara. Mani means the jewel and Padma-the lotus. It is the six syllabled mantra of the bodhisattva of compassion, Avalokiteshvara</item>
+        <item>Om mani padme hum is a mantra particularly associated with the four-armed Shadakshari form of Avalokiteshvara. Mani means the jewel and Padma-the lotus. It is the six syllabled mantra of the bodhisattva of compassion, Avalokiteshvara</item>
+        <item>According to the Larger Sūtra of Immeasurable Life (Mahāyāna Amitāyus Sūtra) Amitābha was, in very ancient times and possibly in another system of worlds, a monk named Dharmakāra</item>
+        <item></item>
+        <item>This is the mantra of Wen Shu wisdom. Also known as Wen Shu mantra. Wisdom Wen Shu Mantra to open our wisdom. You can read a long break this oath is usually in the wisdom of emptiness will slowly open the door, all the best.</item>
+        <item></item>
+        <item>Often recite the Green Tara Mantra, you can remove the root of samsara, free of all demons, plagues complaint. Green Tara Mantra, where physical and mental pain and suffering is the best choice.</item>
+        <item></item>
+        <item></item>
+		<item></item>
+		<item></item>
+		<item></item>
+    </string-array>
+    <string-array name="itemSongsInfo1">
+    	<item></item>
+		<item></item>
+		<item></item>
+		<item></item>
+		<item></item>
+		<item></item>
+    </string-array>
+    
+    <string-array name="itemSongsCont">
+        <item>Om Mani Padme Hum</item>
+        <item>Om Mani Padme Hum</item>
+        <item>Om Amitabha hrih, Om Amitabha Arya Siddhi Hum Hrih</item>
+        <item>Karmapa Chenno</item>
+        <item>Om A-Ja Va-Ja Na-De</item>
+        <item>Om-Vajra-Kili-kilaya Sarva-Vighnam-Bandha-Hum-Phat</item>
+        <item>om tare tuttare ture soha</item>
+        <item>ong bei-xia-jie bar-na xia-wa-re sa-war-zuo-ra za-xia-ma-na-a suo-ha</item>
+        <item>Om Ban Ja Sa Do Hum</item>
+		<item>die ya ta ong bei kan ze bei kan ze</item>
+		<item>ōng，bō là mò lín tuó níng，suō pó hē。</item>
+		<item>ā mí tuó fó</item>
+    </string-array>
+    <string-array name="itemSongsCont1">
+    	<item>/</item>
+		<item>/</item>
+		<item>/</item>
+		<item>/</item>
+		<item>die ya ta ong bei kan ze bei kan ze</item>
+		<item>/</item>
+    </string-array>
+      
+</resources>

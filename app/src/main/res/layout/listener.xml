@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".VoiceListener">
+    >
+	<RelativeLayout
+        android:id="@+id/RelativeLayout"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical">
+		<LinearLayout
+			android:id="@+id/LinearLayoutMain02"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+			<TextView android:id="@+id/status"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:padding="10dip"
+				android:textSize="18sp"
+				android:text="@string/playing_title" 
+			    />
+			<TextView android:id="@+id/songname"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:padding="10dip"
+				android:textSize="18sp"
+			    />
+			<Button
+				android:id="@+id/stop_button"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/stop_title" 
+				android:drawableTop="@drawable/back"
+				/>    
+			<TextView android:id="@+id/songcontent"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:padding="10dip"
+				android:textSize="18sp"
+                android:autoText="false" />
+			<TextView android:id="@+id/songinfo"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:padding="10dip"
+				android:textSize="15sp"
+			    />
+	</LinearLayout>
+    </RelativeLayout>
+</ScrollView>

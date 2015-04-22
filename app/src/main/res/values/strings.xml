@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">New Buddha Voice (Offline)</string>
+    <string name="main_title">Buddha Voice</string>
+    <string name="exit_title">Exit</string>
+    <string name="stop_title">Stop Play</string>
+    <string name="about_title">About</string>
+    <string name="ok_label">OK</string>
+    <string name="loading">Loading</string>
+    <string name="playing_title">Playing...</string>
+    <string name="about_subject">About Buddha Voice</string>
+    <string name="no_connection">Network Error</string>
+<string name="about_text">Buddha Voice is an Android buddha box. Help you peace and health. If you have any suggestion, please email to
+<i>ccjeng@gmail.com</i></string>
+	<string name="tab_online">Online version</string>
+	<string name="tab_offline">Offline version</string>
+	<string name="preference">Configuration</string>
+	<string name="pref_lang">Language Setting</string>
+	<string name="pref_lang_summary">Setup preferred language (Restart required)</string>
+	<string-array name="pref_lang_item">	
+		<item>English</item>	
+		<item>Chinese(Traditional)</item>
+		<item>Chinese(Simplified)</item>
+		<item>Japanese</item>
+	</string-array>
+	<string-array name="pref_lang_code">
+		<item>en</item>
+		<item>zh_TW</item>
+		<item>zh_CN</item>	
+		<item>ja</item>
+	</string-array>
+	<string name="pref_online">Online version Server Setting</string>
+	<string name="pref_online_summary">Setup online version music server (Restart required)</string>
+	<string-array name="pref_online_item">	
+		<item>Google (For China user)</item>
+		<item>Dropbox(More stable and fast)</item>
+	</string-array>
+	<string-array name="pref_online_code">
+		<item>google</item>
+		<item>dropbox</item>
+	</string-array>
+</resources>

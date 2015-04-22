@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory android:title="@string/preference">
+	 	<ListPreference
+            android:title="@string/pref_lang"
+            android:summary="@string/pref_lang_summary"
+            android:key="lang"
+            android:defaultValue="NA"
+            android:entries="@array/pref_lang_item"
+            android:entryValues="@array/pref_lang_code" />
+ <!--     	<ListPreference
+            android:title="@string/pref_online"
+            android:summary="@string/pref_online_summary"
+            android:key="online"
+            android:defaultValue="google"
+            android:entries="@array/pref_online_item"
+            android:entryValues="@array/pref_online_code" />      -->
+    </PreferenceCategory>        
+</PreferenceScreen>

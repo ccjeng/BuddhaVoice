@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">新佛音(離線版)</string>
+    <string name="main_title">佛音Buddha Voice</string>
+    <string name="exit_title">離開</string>
+    <string name="stop_title">停止播放</string>
+    <string name="about_title">關於</string>
+    <string name="ok_label">確認</string>
+    <string name="loading">載入中</string>
+    <string name="playing_title">正在播放 ..</string>
+    <string name="about_subject">關於佛音 Buddha Voice</string>
+    <string name="no_connection">無網路連線，或網路連線錯誤</string>
+	<string name="about_text">佛音是一款手持念佛機，佛曲來源為真言咒語佛學多媒體資料庫，歡迎廣為流傳，願以此功德迴向法界一切眾生。</string>
+	<string name="tab_offline">離線版</string>
+	<string name="tab_online">線上版</string>
+	<string name="preference">設定</string>
+	<string name="pref_lang">語言設定</string>
+	<string name="pref_lang_summary">設定喜好的語言 (需重新啟動)</string>
+	<string-array name="pref_lang_item">
+		<item>英文</item>	
+		<item>繁體中文</item>
+		<item>簡體中文</item>
+		<item>日文</item>
+	</string-array>
+	<string-array name="pref_lang_code">
+		<item>en</item>
+		<item>zh_TW</item>
+		<item>zh_CN</item>	
+		<item>ja</item>
+	</string-array>
+	<string name="pref_online">線上版伺服器設定</string>
+	<string name="pref_online_summary">設定線上版音源檔伺服器 (需重新啟動)</string>
+	<string-array name="pref_online_item">
+		<item>Google (中國用戶適用)</item>
+		<item>Dropbox(其他地區用戶適用, 比較穩定)</item>
+	</string-array>
+	<string-array name="pref_online_code">
+		<item>google</item>
+		<item>dropbox</item>
+	</string-array>
+</resources>
