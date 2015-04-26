@@ -33,9 +33,6 @@ import com.adsdk.sdk.banner.AdView;
 public class VoiceListener extends Activity
         implements OnClickListener, AdListener {
     private static final String TAG = "VoiceListener";
-    private static final int PREF_ID = Menu.FIRST;
-    private static final int ABOUT_ID = Menu.FIRST + 1;
-    private static final int EXIT_ID = Menu.FIRST + 2;
     private MediaPlayer mp;
     private TextView statusTextView;
     private TextView songnameTextView;
@@ -67,7 +64,7 @@ public class VoiceListener extends Activity
         tabName = "tabOff"; //bunde.getString("SourceTab");
         getPrefs();
         findViews();
-      //  ADView();
+        ADView();
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         stopButton.setOnClickListener(this);
@@ -107,13 +104,25 @@ public class VoiceListener extends Activity
     }
 
     private void ADView() {
-        mAdView = new AdView(this, "http://my.mobfox.com/request.php","686a96768fa05b23a7061d27556ae48f", true, true);
+        if (mAdView != null) {
+            removeBanner();
+        }
+        mAdView = new AdView(this, "http://my.mobfox.com/request.php",
+                "fe96717d9875b9da4339ea5367eff1ec", true, true);
         //mAdView.setAdspaceWidth(320); // Optional, used to set the custom size of banner placement. Without setting it, the SDK will use default size of 320x50 or 300x50 depending on device type.
         //mAdView.setAdspaceHeight(50);
         //mAdView.setAdspaceStrict(false); // Optional, tells the server to only supply banner ads that are exactly of the desired size. Without setting it, the server could also supply smaller Ads when no ad of desired size is available.
         mAdView.setAdListener(this);
         layout.addView(mAdView);
     }
+
+    private void removeBanner(){
+        if(mAdView!=null){
+            layout.removeView(mAdView);
+            mAdView = null;
+        }
+    }
+
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.stop_button:
