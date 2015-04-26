@@ -33,13 +33,12 @@
 				android:padding="10dip"
 				android:textSize="18sp"
 			    />
-			<Button
-				android:id="@+id/stop_button"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:text="@string/stop_title" 
-				android:drawableTop="@drawable/back"
-				/>    
+                <Button
+                    android:id="@+id/stop_button"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stop_title"
+                    android:drawableTop="@drawable/back" />
 			<TextView android:id="@+id/songcontent"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"

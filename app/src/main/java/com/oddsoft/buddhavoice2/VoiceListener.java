@@ -24,14 +24,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+/*
 import com.adsdk.sdk.Ad;
 import com.adsdk.sdk.AdListener;
 import com.adsdk.sdk.AdManager;
 import com.adsdk.sdk.banner.AdView;
-
+*/
 public class VoiceListener extends Activity
-        implements OnClickListener, AdListener {
+        implements OnClickListener/*, AdListener*/ {
     private static final String TAG = "VoiceListener";
     private MediaPlayer mp;
     private TextView statusTextView;
@@ -47,8 +47,8 @@ public class VoiceListener extends Activity
     private ProgressDialog dialog = null;
 
     private RelativeLayout layout;
-    private AdView mAdView;
-    private AdManager mManager;
+    //private AdView mAdView;
+    //private AdManager mManager;
 
     final Handler updateHandler = new Handler();
 
@@ -62,9 +62,14 @@ public class VoiceListener extends Activity
         final int itemNumber = Integer.parseInt(bunde.getString("KEY_NBR"));
         final String itemName = bunde.getString("KEY_NAME");
         tabName = "tabOff"; //bunde.getString("SourceTab");
-        getPrefs();
+
         findViews();
-        ADView();
+
+        //show song name
+        songnameTextView.setText(itemName);
+        songinfoTextView.setText(songInfo[itemNumber]);
+        songcontentTextView.setText(songContent[itemNumber]);
+//        ADView();
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         stopButton.setOnClickListener(this);
@@ -75,10 +80,7 @@ public class VoiceListener extends Activity
                 try {
                     //play music
                     playMusic(itemNumber, itemName);
-                    //show song name
-                    songnameTextView.setText(itemName);
-                    Log.d(TAG, itemName);
-                    getSongInfo(itemNumber);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -102,7 +104,7 @@ public class VoiceListener extends Activity
         songInfo = getResources().getStringArray(R.array.itemSongsInfo);
         songContent = getResources().getStringArray(R.array.itemSongsCont);
     }
-
+/*
     private void ADView() {
         if (mAdView != null) {
             removeBanner();
@@ -122,7 +124,7 @@ public class VoiceListener extends Activity
             mAdView = null;
         }
     }
-
+*/
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.stop_button:
@@ -181,8 +183,8 @@ public class VoiceListener extends Activity
     protected void onDestroy() {
         // Terminate extra threads here
         stopMusic();
-        if(mAdView!=null)
-            mAdView.release();
+   //     if(mAdView!=null)
+   //         mAdView.release();
         super.onDestroy();
     }
 
@@ -327,6 +329,12 @@ public class VoiceListener extends Activity
         }
     }
 
+    private void pauseMusic() {
+        if (mp != null) {
+            mp.pause();
+        }
+    }
+
     //back to main menu
     private void goIntent() {
         Intent intent;
@@ -337,11 +345,6 @@ public class VoiceListener extends Activity
         VoiceListener.this.finish();
     }
 
-    //get song infomation
-    private void getSongInfo(int itemNumber) {
-        songinfoTextView.setText(songInfo[itemNumber]);
-        songcontentTextView.setText(songContent[itemNumber]);
-    }
 
     private boolean isNetworkAvailable() {
         final ConnectivityManager connMgr = (ConnectivityManager)
@@ -379,11 +382,12 @@ public class VoiceListener extends Activity
 
     private void getPrefs() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String langPreference = prefs.getString("lang", "");
+        String langPreference = prefs.getString("lang", "NA");
         onlinePreference = prefs.getString("online", "google");
         String lang = null;
+
         Locale appLoc;
-        if (langPreference.equals("")) {
+        if (langPreference.equals("NA")) {
             appLoc = new Locale(Locale.getDefault().getLanguage());
         } else if (langPreference.equals("zh_TW")) {
             lang = langPreference.substring(0, 2).toLowerCase();
@@ -397,16 +401,16 @@ public class VoiceListener extends Activity
         }
 
         Log.d(TAG, "langPreference=" + langPreference);
-
-        //appLoc = new Locale(lang);
-        Locale.setDefault(appLoc);
-        Configuration appConfig = new Configuration();
-        appConfig.locale = appLoc;
-        getBaseContext().getResources().updateConfiguration(appConfig,
-                getBaseContext().getResources().getDisplayMetrics());
+        if (!langPreference.equals("NA")) {
+            Locale.setDefault(appLoc);
+            Configuration appConfig = new Configuration();
+            appConfig.locale = appLoc;
+            getBaseContext().getResources().updateConfiguration(appConfig,
+                    getBaseContext().getResources().getDisplayMetrics());
+        }
     }
 
-
+/*
     @Override
     public void adClicked() {
 
@@ -431,5 +435,6 @@ public class VoiceListener extends Activity
     public void noAdFound() {
 
     }
+    */
 }
 

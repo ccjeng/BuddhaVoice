@@ -7,8 +7,8 @@ android {
         applicationId "com.oddsoft.buddhavoice2"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName '1.0.1'
     }
     buildTypes {
         release {
@@ -24,5 +24,4 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/AdSdk_6.0.8.jar')
     compile files('libs/simple-xml-2.7.1.jar')
-    compile 'com.google.android.gms:play-services:7.0.0'
 }

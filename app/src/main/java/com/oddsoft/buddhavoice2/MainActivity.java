@@ -81,10 +81,10 @@ public class MainActivity extends Activity {
 
     private void getPrefs() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String langPreference = prefs.getString("lang", "");
+        String langPreference = prefs.getString("lang", "NA");
         String lang = null;
         Locale appLoc;
-        if (langPreference.equals("")) {
+        if (langPreference.equals("NA")) {
             appLoc = new Locale(Locale.getDefault().getLanguage());
         } else if (langPreference.equals("zh_TW")) {
             lang = langPreference.substring(0, 2).toLowerCase();
@@ -100,11 +100,13 @@ public class MainActivity extends Activity {
         Log.d(TAG, "langPreference=" + langPreference);
 
         //appLoc = new Locale(lang);
-        Locale.setDefault(appLoc);
-        Configuration appConfig = new Configuration();
-        appConfig.locale = appLoc;
-        getBaseContext().getResources().updateConfiguration(appConfig,
-                getBaseContext().getResources().getDisplayMetrics());
+        if (!langPreference.equals("NA")) {
+            Locale.setDefault(appLoc);
+            Configuration appConfig = new Configuration();
+            appConfig.locale = appLoc;
+            getBaseContext().getResources().updateConfiguration(appConfig,
+                    getBaseContext().getResources().getDisplayMetrics());
+        }
     }
 
     @Override
