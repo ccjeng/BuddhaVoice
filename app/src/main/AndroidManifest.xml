@@ -8,6 +8,9 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -18,28 +21,9 @@
         </activity>
         <activity android:label="@string/app_name" android:name=".VoiceListener"></activity>
         <activity android:label="@string/app_name" android:name=".Prefs"></activity>
-
-        <!--MobFox AD SDK-->
-<!--        <activity
-            android:name="com.adsdk.sdk.banner.InAppWebView"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <activity
-            android:name="com.adsdk.sdk.video.RichMediaActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:hardwareAccelerated="false" />
-        <activity
-            android:name="com.adsdk.sdk.mraid.MraidBrowser"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-
         <activity android:name="com.google.android.gms.ads.AdActivity"
-               android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
-
-         <meta-data android:name="com.google.android.gms.version"
-               android:value="@integer/google_play_services_version"/>
--->
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-   <!-- <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>-->
 </manifest>

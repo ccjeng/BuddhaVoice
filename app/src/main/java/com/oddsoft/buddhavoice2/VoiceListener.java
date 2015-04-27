@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
@@ -22,23 +23,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-/*
-import com.adsdk.sdk.Ad;
-import com.adsdk.sdk.AdListener;
-import com.adsdk.sdk.AdManager;
-import com.adsdk.sdk.banner.AdView;
-*/
+import com.google.android.gms.ads.*;
+
 public class VoiceListener extends Activity
-        implements OnClickListener/*, AdListener*/ {
+        implements OnClickListener {
     private static final String TAG = "VoiceListener";
     private MediaPlayer mp;
     private TextView statusTextView;
     private TextView songnameTextView;
     private TextView songcontentTextView;
     private TextView songinfoTextView;
-    private View stopButton;
+    private Button stopButton;
+    private Button pauseButton;
     private String[] songInfo;
     private String[] songContent;
     private String tabName;
@@ -47,8 +47,8 @@ public class VoiceListener extends Activity
     private ProgressDialog dialog = null;
 
     private RelativeLayout layout;
-    //private AdView mAdView;
-    //private AdManager mManager;
+    private AdView adView;
+
 
     final Handler updateHandler = new Handler();
 
@@ -64,15 +64,16 @@ public class VoiceListener extends Activity
         tabName = "tabOff"; //bunde.getString("SourceTab");
 
         findViews();
+        ADView();
 
         //show song name
         songnameTextView.setText(itemName);
         songinfoTextView.setText(songInfo[itemNumber]);
         songcontentTextView.setText(songContent[itemNumber]);
-//        ADView();
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         stopButton.setOnClickListener(this);
+        pauseButton.setOnClickListener(this);
 
         dialog = ProgressDialog.show(VoiceListener.this, "", getString(R.string.loading), true, true);
         new Thread() {
@@ -99,38 +100,25 @@ public class VoiceListener extends Activity
         songnameTextView = (TextView) findViewById(R.id.songname);
         songcontentTextView = (TextView) findViewById(R.id.songcontent);
         songinfoTextView = (TextView) findViewById(R.id.songinfo);
-        stopButton = (View) findViewById(R.id.stop_button);
+        stopButton = (Button) findViewById(R.id.stop_button);
+        pauseButton = (Button) findViewById(R.id.pause_button);
 
         songInfo = getResources().getStringArray(R.array.itemSongsInfo);
         songContent = getResources().getStringArray(R.array.itemSongsCont);
     }
-/*
-    private void ADView() {
-        if (mAdView != null) {
-            removeBanner();
-        }
-        mAdView = new AdView(this, "http://my.mobfox.com/request.php",
-                "fe96717d9875b9da4339ea5367eff1ec", true, true);
-        //mAdView.setAdspaceWidth(320); // Optional, used to set the custom size of banner placement. Without setting it, the SDK will use default size of 320x50 or 300x50 depending on device type.
-        //mAdView.setAdspaceHeight(50);
-        //mAdView.setAdspaceStrict(false); // Optional, tells the server to only supply banner ads that are exactly of the desired size. Without setting it, the server could also supply smaller Ads when no ad of desired size is available.
-        mAdView.setAdListener(this);
-        layout.addView(mAdView);
-    }
 
-    private void removeBanner(){
-        if(mAdView!=null){
-            layout.removeView(mAdView);
-            mAdView = null;
-        }
-    }
-*/
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.stop_button:
                 stopMusic();
                 //back to main
                 goIntent();
+                break;
+            case R.id.pause_button:
+                if (mp.isPlaying())
+                    pauseMusic();
+                else
+                    resumeMusic();
                 break;
         }
     }
@@ -175,16 +163,24 @@ public class VoiceListener extends Activity
 
     @Override
     protected void onPause() {
-        //stopMusic();
+        if (adView != null)
+            adView.pause();
         super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adView != null)
+            adView.resume();
     }
 
     @Override
     protected void onDestroy() {
         // Terminate extra threads here
         stopMusic();
-   //     if(mAdView!=null)
-   //         mAdView.release();
+        if (adView != null)
+            adView.destroy();
         super.onDestroy();
     }
 
@@ -332,9 +328,21 @@ public class VoiceListener extends Activity
     private void pauseMusic() {
         if (mp != null) {
             mp.pause();
+            pauseButton.setText(R.string.start_title);
+            Drawable icon= this.getResources().getDrawable( R.drawable.media_play);
+            pauseButton.setCompoundDrawablesWithIntrinsicBounds( icon, null, null, null );
         }
     }
 
+    private void resumeMusic() {
+        if (mp != null) {
+            mp.setLooping(true);
+            mp.start();
+            pauseButton.setText(R.string.pause_title);
+            Drawable icon= this.getResources().getDrawable( R.drawable.media_pause);
+            pauseButton.setCompoundDrawablesWithIntrinsicBounds( icon, null, null, null );
+        }
+    }
     //back to main menu
     private void goIntent() {
         Intent intent;
@@ -345,6 +353,28 @@ public class VoiceListener extends Activity
         VoiceListener.this.finish();
     }
 
+    private void ADView() {
+        // 建立 adView。
+        adView = new AdView(this);
+        adView.setAdUnitId("ca-app-pub-6914084100751028/3615464018");
+        adView.setAdSize(AdSize.BANNER);
+
+        // 假設 LinearLayout 已獲得 android:id="@+id/mainLayout" 屬性，
+        // 查詢 LinearLayout。
+        LinearLayout layout = (LinearLayout)findViewById(R.id.LinearLayoutMainAD);
+
+        // 在其中加入 adView。
+        layout.addView(adView);
+
+        // 啟動一般請求。
+        AdRequest adRequest = new AdRequest.Builder().build();
+        //AdRequest adRequest = new AdRequest.Builder()
+        //        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)       // 仿真器
+        //        .addTestDevice("7710C21FF2537758BF3F80963477D68E") // 我的 Galaxy Nexus 測試手機
+        //        .build();
+        // 以廣告請求載入 adView。
+        adView.loadAd(adRequest);
+    }
 
     private boolean isNetworkAvailable() {
         final ConnectivityManager connMgr = (ConnectivityManager)
@@ -379,7 +409,6 @@ public class VoiceListener extends Activity
                 .show();
     }
 
-
     private void getPrefs() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String langPreference = prefs.getString("lang", "NA");
@@ -410,31 +439,5 @@ public class VoiceListener extends Activity
         }
     }
 
-/*
-    @Override
-    public void adClicked() {
-
-    }
-
-    @Override
-    public void adClosed(Ad ad, boolean b) {
-
-    }
-
-    @Override
-    public void adLoadSucceeded(Ad ad) {
-
-    }
-
-    @Override
-    public void adShown(Ad ad, boolean b) {
-
-    }
-
-    @Override
-    public void noAdFound() {
-
-    }
-    */
 }
 

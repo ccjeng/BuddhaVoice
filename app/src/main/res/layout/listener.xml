@@ -15,7 +15,7 @@
 		android:layout_height="fill_parent"
 		android:orientation="vertical">
 		<LinearLayout
-			android:id="@+id/LinearLayoutMain02"
+            android:id="@+id/LinearLayoutMainAD"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -33,12 +33,29 @@
 				android:padding="10dip"
 				android:textSize="18sp"
 			    />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
                 <Button
                     android:id="@+id/stop_button"
-                    android:layout_width="fill_parent"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/stop_title"
-                    android:drawableTop="@drawable/back" />
+                    android:drawableLeft="@drawable/media_stop"
+                    android:layout_weight="0.5"/>
+                <Button
+                    android:id="@+id/pause_button"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pause_title"
+                    android:drawableLeft="@drawable/media_pause"
+                    android:layout_weight="0.5"/>
+            </LinearLayout>
+
 			<TextView android:id="@+id/songcontent"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
