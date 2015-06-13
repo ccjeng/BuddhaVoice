@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">New Buddha Voice (Offline)</string>
+    <string name="app_name">Buddha Voice (Offline)</string>
     <string name="main_title">Buddha Voice</string>
     <string name="exit_title">Exit</string>
     <string name="stop_title">Stop</string>

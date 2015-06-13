@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">新佛音(離線版)</string>
+    <string name="app_name">佛音(離線版)</string>
     <string name="main_title">佛音Buddha Voice</string>
     <string name="exit_title">離開</string>
     <string name="stop_title">停止</string>

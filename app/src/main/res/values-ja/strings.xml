@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">新仏の声(オフライン)</string>
+    <string name="app_name">仏の声(オフライン)</string>
     <string name="main_title">仏の声Buddha Voice</string>
     <string name="exit_title">終了</string>
     <string name="stop_title">再生を停止</string>
