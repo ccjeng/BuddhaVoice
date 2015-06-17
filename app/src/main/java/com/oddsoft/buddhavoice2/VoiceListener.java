@@ -308,14 +308,8 @@ public class VoiceListener extends Activity
         } else {
             //offline version
             try {
-
-                int maxVolume = 50;
-                int currVolume = 10;
-                float log=(float)(Math.log(maxVolume-currVolume)/Math.log(maxVolume));
-
                 mp = MediaPlayer.create(getBaseContext(), resourceID);
                 mp.setLooping(true);
-                mp.setVolume(1-log, 1-log);
                 mp.start();
             } catch (Exception e) {
                 e.printStackTrace();
