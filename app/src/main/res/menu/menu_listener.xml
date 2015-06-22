@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.oddsoft.buddhavoice2.MainActivity" >
+
+    <item
+        android:id="@+id/stop_button"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/media_stop"
+        android:title="@string/stop_title"/>
+
+    <item
+        android:id="@+id/pause_button"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/media_pause"
+        android:title="@string/pause_title"/>
+
+</menu>

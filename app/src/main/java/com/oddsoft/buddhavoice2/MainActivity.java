@@ -9,15 +9,22 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -28,19 +35,30 @@ public class MainActivity extends Activity {
     private String[] song;
     private ProgressDialog dialog = null;
 
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private LinearLayout mLlvDrawerContent;
+    private ListView mLsvDrawerMenu;
+
+    // 記錄被選擇的選單指標用
+    private int mCurrentMenuItemPosition = -1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getActionBar().setDisplayHomeAsUpEnabled(false);
+        initActionBar();
+        initDrawer();
+        initDrawerList();
 
         listView = (ListView) findViewById(R.id.ListView01);
 
         song = getResources().getStringArray(R.array.itemSongs);
 
         //listView.setAdapter(new SongListAdapter(this, R.layout.list_item, song));
-        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , song));
+        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, song));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -49,7 +67,7 @@ public class MainActivity extends Activity {
                     public void run() {
                         try {
                             goIntent(position, song[position]);
-                        } catch(Exception e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
                             dialog.dismiss();
@@ -76,7 +94,7 @@ public class MainActivity extends Activity {
 
         Map<String,String> parameters = new HashMap<String,String>();
         parameters.put("Song", itemname.toString());
-        startActivityForResult(intent,0);
+        startActivityForResult(intent, 0);
     }
 
     private void getPrefs() {
@@ -109,23 +127,91 @@ public class MainActivity extends Activity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    private void initActionBar(){
+        //顯示 Up Button (位在 Logo 左手邊的按鈕圖示)
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        //打開 Up Button 的點擊功能
+        getActionBar().setHomeButtonEnabled(true);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            case R.id.action_settings:
+    private void initDrawer() {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drw_layout);
+        // 設定 Drawer 的影子
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                mDrawerLayout,    // 讓 Drawer Toggle 知道母體介面是誰
+                R.drawable.ic_drawer, // Drawer 的 Icon
+                R.string.app_name, // Drawer 被打開時的描述
+                R.string.app_name // Drawer 被關閉時的描述
+        ) {
+            //被打開後要做的事情
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                // 將 Title 設定為自定義的文字
+                getActionBar().setTitle(R.string.app_name);
+            }
+
+            //被關上後要做的事情
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                // 將 Title 設定回 APP 的名稱
+                getActionBar().setTitle(R.string.app_name);
+            }
+        };
+
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+    }
+
+    private void initDrawerList() {
+
+        String[] drawer_menu = this.getResources().getStringArray(R.array.drawer_menu);
+
+        // 定義新宣告的兩個物件：選項清單的 ListView 以及 Drawer內容的 LinearLayou
+        mLsvDrawerMenu = (ListView) findViewById(R.id.lsv_drawer_menu);
+        mLlvDrawerContent = (LinearLayout) findViewById(R.id.llv_left_drawer);
+
+
+        List<HashMap<String,String>> lstData = new ArrayList<HashMap<String,String>>();
+        HashMap<String, String> mapValue = new HashMap<String, String>();
+        mapValue.put("icon", Integer.toString(android.R.drawable.ic_menu_preferences));
+        mapValue.put("title", drawer_menu[0]);
+        lstData.add(mapValue);
+
+        mapValue = new HashMap<String, String>();
+        mapValue.put("icon", Integer.toString(android.R.drawable.ic_dialog_info));
+        mapValue.put("title", drawer_menu[1]);
+        lstData.add(mapValue);
+
+
+        SimpleAdapter adapter = new SimpleAdapter(this, lstData
+                , R.layout.drawer_item
+                , new String[]{"icon", "title"}
+                , new int[]{R.id.rowIcon, R.id.rowText});
+        mLsvDrawerMenu.setAdapter(adapter);
+
+        // 當清單選項的子物件被點擊時要做的動作
+        mLsvDrawerMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                selectMenuItem(position);
+            }
+        });
+
+    }
+
+    private void selectMenuItem(int position) {
+        mCurrentMenuItemPosition = position;
+
+        switch (mCurrentMenuItemPosition) {
+            case 0:
                 startActivity(new Intent(this, Prefs.class));
-                return true;
-            case R.id.about_settings:
+                break;
+            case 1:
                 //show about message
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.about_title)
@@ -138,13 +224,48 @@ public class MainActivity extends Activity {
                                     }
                                 })
                         .show();
-                return true;
-            case R.id.exit_settings:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+                break;
         }
+
+        // 將選單的子物件設定為被選擇的狀態
+        mLsvDrawerMenu.setItemChecked(position, true);
+
+        // 關掉 Drawer
+        mDrawerLayout.closeDrawer(mLlvDrawerContent);
+    }
+
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 

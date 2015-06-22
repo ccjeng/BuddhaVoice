@@ -12,6 +12,16 @@
     <string name="playing_title">正在播放 ..</string>
     <string name="about_subject">關於佛音 Buddha Voice</string>
     <string name="no_connection">無網路連線，或網路連線錯誤</string>
+
+	<string name="open_left_drawer">Open Drawer</string>
+	<string name="open_right_drawer">Open Right Drawer</string>
+	<string name="close_left_drawer">Open Drawer</string>
+
+	<string-array name="drawer_menu">
+		<item>設定</item>
+		<item>關於</item>
+	</string-array>
+
 	<string name="about_text">佛音是一款手持念佛機，佛曲來源為真言咒語佛學多媒體資料庫，歡迎廣為流傳，願以此功德迴向法界一切眾生。</string>
 	<string name="tab_offline">離線版</string>
 	<string name="tab_online">線上版</string>

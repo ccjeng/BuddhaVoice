@@ -11,6 +11,15 @@
     <string name="loading">Loading</string>
     <string name="playing_title">今すぐ再生 ..</string>
     <string name="about_subject">について仏の声 Buddha Voice</string>
+	<string name="open_left_drawer">Open Drawer</string>
+	<string name="open_right_drawer">Open Right Drawer</string>
+	<string name="close_left_drawer">Open Drawer</string>
+
+	<string-array name="drawer_menu">
+		<item>配置</item>
+		<item>について</item>
+	</string-array>
+
     <string name="no_connection">Network Error</string>
 	<string name="about_text">仏ザブッダは、ハンドヘルド機、仏教の真言仏教のマントラマルチメディアデータベースのソースであり、広く流通し、すべての生き物には、このメリットのダルマレルムに戻るには、希望を歓迎した。</string>
 	<string name="tab_online">Online version</string>

@@ -12,6 +12,16 @@
     <string name="playing_title">Playing...</string>
     <string name="about_subject">About Buddha Voice</string>
     <string name="no_connection">Network Error</string>
+
+	<string name="open_left_drawer">Open Drawer</string>
+	<string name="open_right_drawer">Open Right Drawer</string>
+	<string name="close_left_drawer">Open Drawer</string>
+
+	<string-array name="drawer_menu">
+		<item>Setting</item>
+		<item>About</item>
+	</string-array>
+
 <string name="about_text">Buddha Voice is an Android buddha box. Help you peace and health. If you have any suggestion, please email to
 <i>ccjeng@gmail.com</i></string>
 	<string name="tab_online">Online version</string>

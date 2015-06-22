@@ -1,13 +1,39 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drw_layout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <ListView
-        android:layout_width="fill_parent"
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ListView01"
-        android:layout_weight="1"
-        android:drawSelectorOnTop="true"
-        android:layout_alignParentBottom="true"
-        />
-</RelativeLayout>
+        android:orientation="vertical" >
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ListView01"
+            android:layout_weight="1"
+            android:drawSelectorOnTop="true"
+            android:layout_alignParentBottom="true"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/llv_left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:background="#ffffff" >
+
+        <ListView android:id="@+id/lsv_drawer_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:choiceMode="singleChoice"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp" />
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
