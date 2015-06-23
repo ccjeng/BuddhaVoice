@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Buddha Voice (Offline)</string>
+    <string name="app_name">Buddha Voice</string>
     <string name="main_title">Buddha Voice</string>
     <string name="exit_title">Exit</string>
     <string name="stop_title">Stop</string>
@@ -24,8 +24,6 @@
 
 <string name="about_text">Buddha Voice is an Android buddha box. Help you peace and health. If you have any suggestion, please email to
 <i>ccjeng@gmail.com</i></string>
-	<string name="tab_online">Online version</string>
-	<string name="tab_offline">Offline version</string>
 	<string name="preference">Configuration</string>
 	<string name="pref_lang">Language Setting</string>
 	<string name="pref_lang_summary">Setup preferred language (Restart required)</string>

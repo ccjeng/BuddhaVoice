@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">仏の声(オフライン)</string>
+    <string name="app_name">仏の声</string>
     <string name="main_title">仏の声Buddha Voice</string>
     <string name="exit_title">終了</string>
     <string name="stop_title">再生を停止</string>
@@ -22,8 +22,6 @@
 
     <string name="no_connection">Network Error</string>
 	<string name="about_text">仏ザブッダは、ハンドヘルド機、仏教の真言仏教のマントラマルチメディアデータベースのソースであり、広く流通し、すべての生き物には、このメリットのダルマレルムに戻るには、希望を歓迎した。</string>
-	<string name="tab_online">Online version</string>
-	<string name="tab_offline">Offline version</string>
 	<string name="preference">配置</string>
 	<string name="pref_lang">言語設定</string>
 	<string name="pref_lang_summary">セットアップ言語 (再起動が必要です)</string>

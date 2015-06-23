@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">佛音(離線版)</string>
+    <string name="app_name">佛音</string>
     <string name="main_title">佛音Buddha Voice</string>
     <string name="exit_title">離開</string>
     <string name="stop_title">停止</string>
@@ -23,8 +23,6 @@
 	</string-array>
 
 	<string name="about_text">佛音是一款手持念佛機，佛曲來源為真言咒語佛學多媒體資料庫，歡迎廣為流傳，願以此功德迴向法界一切眾生。</string>
-	<string name="tab_offline">離線版</string>
-	<string name="tab_online">線上版</string>
 	<string name="preference">設定</string>
 	<string name="pref_lang">語言設定</string>
 	<string name="pref_lang_summary">設定喜好的語言 (需重新啟動)</string>

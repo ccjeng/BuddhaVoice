@@ -24,6 +24,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,15 +39,13 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import com.google.android.gms.ads.*;
 
-public class VoiceListener extends Activity {
+public class VoiceListener extends ActionBarActivity {
     private static final String TAG = "VoiceListener";
     private MediaPlayer mp;
     private TextView statusTextView;
     private TextView songnameTextView;
     private TextView songcontentTextView;
     private TextView songinfoTextView;
-    //private Button stopButton;
-    //private Button pauseButton;
     private String[] songInfo;
     private String[] songContent;
     private String tabName;
@@ -84,7 +83,7 @@ public class VoiceListener extends Activity {
         tabName = "tabOff"; //bunde.getString("SourceTab");
 
         findViews();
-        ADView();
+        //ADView();
 
         //show song name
         songnameTextView.setText(itemName);
@@ -146,9 +145,9 @@ public class VoiceListener extends Activity {
 
     private void initActionBar(){
         //顯示 Up Button (位在 Logo 左手邊的按鈕圖示)
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //打開 Up Button 的點擊功能
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     private void initDrawer() {
@@ -167,14 +166,14 @@ public class VoiceListener extends Activity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 // 將 Title 設定為自定義的文字
-                getActionBar().setTitle(R.string.app_name);
+                getSupportActionBar().setTitle(R.string.app_name);
             }
 
             //被關上後要做的事情
             @Override
             public void onDrawerClosed(View drawerView) {
                 // 將 Title 設定回 APP 的名稱
-                getActionBar().setTitle(R.string.app_name);
+                getSupportActionBar().setTitle(R.string.app_name);
             }
         };
 

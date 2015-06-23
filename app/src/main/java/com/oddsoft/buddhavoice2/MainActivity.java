@@ -1,6 +1,5 @@
 package com.oddsoft.buddhavoice2;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -12,6 +11,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,7 +30,7 @@ import java.util.Locale;
 import java.util.Map;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
     private static final String TAG = "BuddhaVoice";
     private ListView listView;
     private String[] song;
@@ -39,6 +40,7 @@ public class MainActivity extends Activity {
     private ActionBarDrawerToggle mDrawerToggle;
     private LinearLayout mLlvDrawerContent;
     private ListView mLsvDrawerMenu;
+    private Toolbar toolbar;
 
     // 記錄被選擇的選單指標用
     private int mCurrentMenuItemPosition = -1;
@@ -89,7 +91,6 @@ public class MainActivity extends Activity {
 
         bundle.putString("KEY_NBR", Integer.toString(itemnumber));
         bundle.putString("KEY_NAME", itemname.toString());
-       // bundle.putString("SourceTab", tabSourceIntent.toString());
         intent.putExtras(bundle);
 
         Map<String,String> parameters = new HashMap<String,String>();
@@ -128,10 +129,14 @@ public class MainActivity extends Activity {
     }
 
     private void initActionBar(){
+
+        //toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+
         //顯示 Up Button (位在 Logo 左手邊的按鈕圖示)
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //打開 Up Button 的點擊功能
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     private void initDrawer() {
@@ -150,14 +155,14 @@ public class MainActivity extends Activity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 // 將 Title 設定為自定義的文字
-                getActionBar().setTitle(R.string.app_name);
+                getSupportActionBar().setTitle(R.string.app_name);
             }
 
             //被關上後要做的事情
             @Override
             public void onDrawerClosed(View drawerView) {
                 // 將 Title 設定回 APP 的名稱
-                getActionBar().setTitle(R.string.app_name);
+                getSupportActionBar().setTitle(R.string.app_name);
             }
         };
 
