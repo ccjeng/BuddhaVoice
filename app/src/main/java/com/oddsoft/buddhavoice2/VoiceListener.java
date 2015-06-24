@@ -77,7 +77,7 @@ public class VoiceListener extends Activity {
         tabName = "tabOff"; //bunde.getString("SourceTab");
 
         findViews();
-        ADView();
+        //ADView();
 
         //show song name
         songnameTextView.setText(itemName);
