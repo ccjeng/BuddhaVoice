@@ -14,7 +14,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
@@ -24,22 +23,18 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import com.google.android.gms.ads.*;
 
-public class VoiceListener extends ActionBarActivity {
+public class VoiceListener extends Activity {
     private static final String TAG = "VoiceListener";
     private MediaPlayer mp;
     private TextView statusTextView;
@@ -53,7 +48,6 @@ public class VoiceListener extends ActionBarActivity {
     private String onlinePreference;
     private ProgressDialog dialog = null;
 
-    private RelativeLayout layout;
     private AdView adView;
 
     private DrawerLayout mDrawerLayout;
@@ -83,7 +77,7 @@ public class VoiceListener extends ActionBarActivity {
         tabName = "tabOff"; //bunde.getString("SourceTab");
 
         findViews();
-        //ADView();
+        ADView();
 
         //show song name
         songnameTextView.setText(itemName);
@@ -91,8 +85,6 @@ public class VoiceListener extends ActionBarActivity {
         songcontentTextView.setText(songContent[itemNumber]);
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        //stopButton.setOnClickListener(this);
-        //pauseButton.setOnClickListener(this);
 
         dialog = ProgressDialog.show(VoiceListener.this, "", getString(R.string.loading), true, true);
         new Thread() {
@@ -113,41 +105,20 @@ public class VoiceListener extends ActionBarActivity {
     }
 
     private void findViews() {
-        //layout = (RelativeLayout) findViewById(R.id.RelativeLayout);
-
         statusTextView = (TextView) findViewById(R.id.status);
         songnameTextView = (TextView) findViewById(R.id.songname);
         songcontentTextView = (TextView) findViewById(R.id.songcontent);
         songinfoTextView = (TextView) findViewById(R.id.songinfo);
-        //stopButton = (Button) findViewById(R.id.stop_button);
-        //pauseButton = (Button) findViewById(R.id.pause_button);
-
         songInfo = getResources().getStringArray(R.array.itemSongsInfo);
         songContent = getResources().getStringArray(R.array.itemSongsCont);
     }
 
-    /*
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.stop_button:
-                stopMusic();
-                //back to main
-                goIntent();
-                break;
-            case R.id.pause_button:
-                if (mp.isPlaying())
-                    pauseMusic();
-                else
-                    resumeMusic();
-                break;
-        }
-    }*/
 
     private void initActionBar(){
         //顯示 Up Button (位在 Logo 左手邊的按鈕圖示)
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         //打開 Up Button 的點擊功能
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
     }
 
     private void initDrawer() {
@@ -166,14 +137,14 @@ public class VoiceListener extends ActionBarActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 // 將 Title 設定為自定義的文字
-                getSupportActionBar().setTitle(R.string.app_name);
+                getActionBar().setTitle(R.string.app_name);
             }
 
             //被關上後要做的事情
             @Override
             public void onDrawerClosed(View drawerView) {
                 // 將 Title 設定回 APP 的名稱
-                getSupportActionBar().setTitle(R.string.app_name);
+                getActionBar().setTitle(R.string.app_name);
             }
         };
 
@@ -189,18 +160,15 @@ public class VoiceListener extends ActionBarActivity {
         mLsvDrawerMenu = (ListView) findViewById(R.id.lsv_drawer_menu);
         mLlvDrawerContent = (LinearLayout) findViewById(R.id.llv_left_drawer);
 
+        int[] iconImage = { android.R.drawable.ic_menu_preferences, android.R.drawable.ic_dialog_info };
 
         List<HashMap<String,String>> lstData = new ArrayList<HashMap<String,String>>();
-        HashMap<String, String> mapValue = new HashMap<String, String>();
-        mapValue.put("icon", Integer.toString(android.R.drawable.ic_menu_preferences));
-        mapValue.put("title", drawer_menu[0]);
-        lstData.add(mapValue);
-
-        mapValue = new HashMap<String, String>();
-        mapValue.put("icon", Integer.toString(android.R.drawable.ic_dialog_info));
-        mapValue.put("title", drawer_menu[1]);
-        lstData.add(mapValue);
-
+        for (int i = 0; i < iconImage.length; i++) {
+            HashMap<String, String> mapValue = new HashMap<String, String>();
+            mapValue.put("icon", Integer.toString(iconImage[i]));
+            mapValue.put("title", drawer_menu[i]);
+            lstData.add(mapValue);
+        }
 
         SimpleAdapter adapter = new SimpleAdapter(this, lstData
                 , R.layout.drawer_item
@@ -464,9 +432,6 @@ public class VoiceListener extends ActionBarActivity {
     private void pauseMusic() {
         if (mp != null) {
             mp.pause();
-            //pauseButton.setText(R.string.start_title);
-            //Drawable icon= this.getResources().getDrawable( R.drawable.media_play);
-            //pauseButton.setCompoundDrawablesWithIntrinsicBounds( icon, null, null, null );
         }
     }
 
@@ -474,9 +439,6 @@ public class VoiceListener extends ActionBarActivity {
         if (mp != null) {
             mp.setLooping(true);
             mp.start();
-            //pauseButton.setText(R.string.pause_title);
-            //Drawable icon= this.getResources().getDrawable( R.drawable.media_pause);
-            //pauseButton.setCompoundDrawablesWithIntrinsicBounds( icon, null, null, null );
         }
     }
     //back to main menu
@@ -492,11 +454,11 @@ public class VoiceListener extends ActionBarActivity {
     private void ADView() {
         adView = (AdView) findViewById(R.id.adView);
 
-        //AdRequest adRequest = new AdRequest.Builder().build();
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)       // 仿真器
-                .addTestDevice("7710C21FF2537758BF3F80963477D68E") // 我的 Galaxy Nexus 測試手機
-                .build();
+        AdRequest adRequest = new AdRequest.Builder().build();
+        //AdRequest adRequest = new AdRequest.Builder()
+        //        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)       // 仿真器
+        //        .addTestDevice("7710C21FF2537758BF3F80963477D68E") // 我的 Galaxy Nexus 測試手機
+        //        .build();
         adView.loadAd(adRequest);
     }
 

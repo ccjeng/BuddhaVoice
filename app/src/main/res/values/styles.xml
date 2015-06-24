@@ -1,12 +1,17 @@
 <resources>
 
     <!-- Base application theme, ... -->
-    <style name="AppBaseTheme" parent="Theme.Appcompat">
+    <style name="AppBaseTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/ActionBar</item>
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- ... -->
+    </style>
+
+    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#ffffff</item>
     </style>
 
 </resources>
