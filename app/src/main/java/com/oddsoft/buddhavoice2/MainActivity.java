@@ -22,6 +22,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.oddsoft.buddhavoice2.app.Analytics;
+import com.oddsoft.buddhavoice2.app.BuddhaVoice;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +53,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Analytics ga = new Analytics();
+        if (!BuddhaVoice.APPDEBUG)
+            ga.initTracker(this);
         initActionBar();
         initDrawer();
         initDrawerList();
@@ -282,6 +289,15 @@ public class MainActivity extends Activity {
     protected void onStart() {
         super.onStart();
         getPrefs();
+        if (!BuddhaVoice.APPDEBUG)
+            GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (!BuddhaVoice.APPDEBUG)
+            GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
     @Override
