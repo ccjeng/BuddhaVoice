@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
     <string-array name="itemSongs">
         <item>Om mani padme hum(六字大明咒)</item>
         <item>Om mani padme hum by Karmapa(六字大明咒)</item>
