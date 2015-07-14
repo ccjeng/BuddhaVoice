@@ -52,7 +52,7 @@ public class VoiceListener extends Activity {
     private ProgressDialog dialog = null;
 
     private AdView adView;
-
+    private Analytics ga;
     final Handler updateHandler = new Handler();
 
     @Override
@@ -62,9 +62,8 @@ public class VoiceListener extends Activity {
         setContentView(R.layout.listener);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Analytics ga = new Analytics();
-        if (!BuddhaVoice.APPDEBUG)
-            ga.initTracker(this);
+        ga = new Analytics();
+        ga.trackerPage(this);
 
         //get intent values
         Bundle bunde = this.getIntent().getExtras();
@@ -128,11 +127,13 @@ public class VoiceListener extends Activity {
                 finish();
                 break;
             case R.id.stop_button:
+                ga.trackEvent(this, "Click", "Button", "Stop", 0);
                 stopMusic();
                 //back to main
                 goIntent();
                 break;
             case R.id.pause_button:
+                ga.trackEvent(this, "Click", "Button", "Pause", 0);
                 if (mp.isPlaying())
                     pauseMusic();
                 else
@@ -167,17 +168,14 @@ public class VoiceListener extends Activity {
 
     protected void onStop() {
         super.onStop();
-        if (!BuddhaVoice.APPDEBUG)
-            GoogleAnalytics.getInstance(this).reportActivityStop(this);
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         getPrefs();
-        if (!BuddhaVoice.APPDEBUG)
-            GoogleAnalytics.getInstance(this).reportActivityStart(this);
-
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
     }
 
     private void playMusic(int itemnumber, String itemname) {

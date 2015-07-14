@@ -47,15 +47,16 @@ public class MainActivity extends Activity {
     // 記錄被選擇的選單指標用
     private int mCurrentMenuItemPosition = -1;
 
+    private Analytics ga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Analytics ga = new Analytics();
-        if (!BuddhaVoice.APPDEBUG)
-            ga.initTracker(this);
+        ga = new Analytics();
+        ga.trackerPage(this);
+
         initActionBar();
         initDrawer();
         initDrawerList();
@@ -87,6 +88,9 @@ public class MainActivity extends Activity {
     }
 
     private void goIntent(int itemnumber, String itemname) {
+
+        ga.trackEvent(this, "Listen", "Song", itemname.toString(), 0);
+
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, VoiceListener.class);
         Bundle bundle = new Bundle();
