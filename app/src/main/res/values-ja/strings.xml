@@ -20,6 +20,9 @@
 		<item>について</item>
 	</string-array>
 
+	<string name="tab1">ショート呪文</string>
+	<string name="tab2">ロング呪文</string>
+
     <string name="no_connection">Network Error</string>
 	<string name="about_text">仏ザブッダは、ハンドヘルド機、仏教の真言仏教のマントラマルチメディアデータベースのソースであり、広く流通し、すべての生き物には、このメリットのダルマレルムに戻るには、希望を歓迎した。</string>
 	<string name="preference">配置</string>

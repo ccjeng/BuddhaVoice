@@ -23,6 +23,8 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +39,7 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.oddsoft.buddhavoice2.app.Analytics;
 import com.oddsoft.buddhavoice2.app.BuddhaVoice;
 
-public class VoiceListener extends Activity {
+public class VoiceListener extends ActionBarActivity {
     private static final String TAG = "VoiceListener";
     private MediaPlayer mp;
     private TextView statusTextView;
@@ -54,13 +56,19 @@ public class VoiceListener extends Activity {
     private AdView adView;
     private Analytics ga;
     final Handler updateHandler = new Handler();
+    private Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.listener);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_drawer);
+        // Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
+        toolbar.setOnMenuItemClickListener(onMenuItemClick);
 
         ga = new Analytics();
         ga.trackerPage(this);
@@ -108,6 +116,35 @@ public class VoiceListener extends Activity {
         songContent = getResources().getStringArray(R.array.itemSongsCont);
     }
 
+    private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            String msg = "";
+            switch (menuItem.getItemId()) {
+                case android.R.id.home:
+                    finish();
+                    break;
+                case R.id.stop_button:
+                    ga.trackEvent(VoiceListener.this, "Click", "Button", "Stop", 0);
+                    stopMusic();
+                    //back to main
+                    goIntent();
+                    break;
+                case R.id.pause_button:
+                    ga.trackEvent(VoiceListener.this, "Click", "Button", "Pause", 0);
+                    if (mp.isPlaying())
+                        pauseMusic();
+                    else
+                        resumeMusic();
+                    break;
+            }
+
+            if(!msg.equals("")) {
+                //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -115,7 +152,7 @@ public class VoiceListener extends Activity {
         getMenuInflater().inflate(R.menu.menu_listener, menu);
         return true;
     }
-
+/*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -142,7 +179,7 @@ public class VoiceListener extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-
+*/
     @Override
     protected void onPause() {
         if (adView != null)

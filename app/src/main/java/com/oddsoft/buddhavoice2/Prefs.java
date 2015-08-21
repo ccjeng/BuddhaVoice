@@ -10,7 +10,8 @@ public class Prefs extends PreferenceActivity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		//getActionBar().setDisplayHomeAsUpEnabled(true);
+
 		addPreferencesFromResource(R.xml.settings);
 	}
 

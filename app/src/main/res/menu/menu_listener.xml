@@ -1,19 +1,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.oddsoft.buddhavoice2.VoiceListener" >
 
     <item
         android:id="@+id/stop_button"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom"
         android:icon="@drawable/media_stop"
-        android:title="@string/stop_title"/>
+        android:title="@string/stop_title"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/pause_button"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom"
         android:icon="@drawable/media_pause"
-        android:title="@string/pause_title"/>
+        android:title="@string/pause_title"
+        app:showAsAction="ifRoom"/>
 
 </menu>

@@ -21,6 +21,9 @@
 		<item>关於</item>
 	</string-array>
 
+	<string name="tab1">短咒</string>
+	<string name="tab2">長咒</string>
+
     <string name="no_connection">无网路连线，或网路连线错误</string>
 <string name="about_text">佛音是一款Android手机的手持念佛机，佛曲来源为真言咒语佛学多媒体资料库，欢迎广为流传，愿以此功德回向法界一切众生。</string>
 	<string name="preference">设定</string>

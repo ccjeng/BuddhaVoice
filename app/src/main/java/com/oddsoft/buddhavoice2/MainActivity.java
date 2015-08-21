@@ -11,7 +11,11 @@ import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +29,8 @@ import android.widget.SimpleAdapter;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.oddsoft.buddhavoice2.app.Analytics;
 import com.oddsoft.buddhavoice2.app.BuddhaVoice;
+import com.oddsoft.buddhavoice2.app.SlidingTabLayout;
+import com.oddsoft.buddhavoice2.app.ViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,9 +39,10 @@ import java.util.Locale;
 import java.util.Map;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
     private static final String TAG = "BuddhaVoice";
     private ListView listView;
+
     private String[] song;
     private ProgressDialog dialog = null;
 
@@ -49,6 +56,13 @@ public class MainActivity extends Activity {
 
     private Analytics ga;
 
+    private ActionBar actionbar;
+    private Toolbar toolbar;
+    private ViewPager pager;
+    private ViewPagerAdapter adapter;
+    private SlidingTabLayout tabs;
+    int Numboftabs =2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,49 +75,31 @@ public class MainActivity extends Activity {
         initDrawer();
         initDrawerList();
 
-        listView = (ListView) findViewById(R.id.ListView01);
+        CharSequence Titles[]={getString(R.string.tab1),getString(R.string.tab2)};
 
-        song = getResources().getStringArray(R.array.itemSongs);
+        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
+        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
 
-        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, song));
+        // Assigning ViewPager View and setting the adapter
+        pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                dialog = ProgressDialog.show(MainActivity.this, "", getString(R.string.loading), true, true);
-                new Thread() {
-                    public void run() {
-                        try {
-                            goIntent(position, song[position]);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        } finally {
-                            dialog.dismiss();
-                        }
-                    }
-                }.start();
+        // Assiging the Sliding Tab Layout View
+        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
+        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
 
+
+        // Setting Custom Color for the Scroll bar indicator of the Tab View
+        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.tabsScrollColor);
             }
         });
-        listView.setSelection(0);
-    }
 
-    private void goIntent(int itemnumber, String itemname) {
+        // Setting the ViewPager For the SlidingTabsLayout
+        tabs.setViewPager(pager);
 
-        ga.trackEvent(this, "Listen", "Song", itemname.toString(), 0);
-
-        Intent intent = new Intent();
-        intent.setClass(MainActivity.this, VoiceListener.class);
-        Bundle bundle = new Bundle();
-        Log.d(TAG, "goIntent-itemnumber: " + Integer.toString(itemnumber));
-        Log.d(TAG, "goIntent-itemname: " + itemname.toString());
-
-        bundle.putString("KEY_NBR", Integer.toString(itemnumber));
-        bundle.putString("KEY_NAME", itemname.toString());
-        intent.putExtras(bundle);
-
-        Map<String,String> parameters = new HashMap<String,String>();
-        parameters.put("Song", itemname.toString());
-        startActivityForResult(intent, 0);
     }
 
     private void getPrefs() {
@@ -137,10 +133,24 @@ public class MainActivity extends Activity {
     }
 
     private void initActionBar(){
+
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        //set home icon
+        //toolbar.setLogo(R.drawable.icon);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_drawer);
+
+        actionbar = getSupportActionBar();
+
+
+        //actionbar.setTitle("這是 Toolbar 標題");
+
+
         //顯示 Up Button (位在 Logo 左手邊的按鈕圖示)
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
         //打開 Up Button 的點擊功能
-        getActionBar().setHomeButtonEnabled(true);
+        //getActionBar().setHomeButtonEnabled(true);
     }
 
     private void initDrawer() {
@@ -159,14 +169,15 @@ public class MainActivity extends Activity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 // 將 Title 設定為自定義的文字
-                getActionBar().setTitle(R.string.app_name);
+                actionbar.setTitle(R.string.app_name);
+
             }
 
             //被關上後要做的事情
             @Override
             public void onDrawerClosed(View drawerView) {
                 // 將 Title 設定回 APP 的名稱
-                getActionBar().setTitle(R.string.app_name);
+                actionbar.setTitle(R.string.app_name);
             }
         };
 
@@ -210,6 +221,7 @@ public class MainActivity extends Activity {
         });
 
     }
+
 
     private void selectMenuItem(int position) {
         mCurrentMenuItemPosition = position;
