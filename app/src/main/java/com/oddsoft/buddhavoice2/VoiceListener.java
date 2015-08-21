@@ -46,8 +46,8 @@ public class VoiceListener extends ActionBarActivity {
     private TextView songnameTextView;
     private TextView songcontentTextView;
     private TextView songinfoTextView;
-    private String[] songInfo;
-    private String[] songContent;
+    private String[] songInfo, songInfo1;
+    private String[] songContent, songContent1;
     private String tabName;
     private String PATH;
     private String onlinePreference;
@@ -66,7 +66,9 @@ public class VoiceListener extends ActionBarActivity {
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_drawer);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationIcon(android.R.drawable.ic_menu_close_clear_cancel);
         // Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
         toolbar.setOnMenuItemClickListener(onMenuItemClick);
 
@@ -77,15 +79,20 @@ public class VoiceListener extends ActionBarActivity {
         Bundle bunde = this.getIntent().getExtras();
         final int itemNumber = Integer.parseInt(bunde.getString("KEY_NBR"));
         final String itemName = bunde.getString("KEY_NAME");
-        tabName = "tabOff"; //bunde.getString("SourceTab");
+        tabName = bunde.getString("TAB");
 
         findViews();
         ADView();
 
         //show song name
         songnameTextView.setText(itemName);
-        songinfoTextView.setText(songInfo[itemNumber]);
-        songcontentTextView.setText(songContent[itemNumber]);
+        if (tabName.equals("TAB1")) {
+            songinfoTextView.setText(songInfo[itemNumber]);
+            songcontentTextView.setText(songContent[itemNumber]);
+        } else {
+            songinfoTextView.setText(songInfo1[itemNumber]);
+            songcontentTextView.setText(songContent1[itemNumber]);
+        }
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
@@ -114,6 +121,8 @@ public class VoiceListener extends ActionBarActivity {
         songinfoTextView = (TextView) findViewById(R.id.songinfo);
         songInfo = getResources().getStringArray(R.array.itemSongsInfo);
         songContent = getResources().getStringArray(R.array.itemSongsCont);
+        songInfo1 = getResources().getStringArray(R.array.itemSongsInfo1);
+        songContent1 = getResources().getStringArray(R.array.itemSongsCont1);
     }
 
     private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
@@ -152,34 +161,14 @@ public class VoiceListener extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_listener, menu);
         return true;
     }
-/*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
 
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-            case R.id.stop_button:
-                ga.trackEvent(this, "Click", "Button", "Stop", 0);
-                stopMusic();
-                //back to main
-                goIntent();
-                break;
-            case R.id.pause_button:
-                ga.trackEvent(this, "Click", "Button", "Pause", 0);
-                if (mp.isPlaying())
-                    pauseMusic();
-                else
-                    resumeMusic();
-                break;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == android.R.id.home) {
+            finish();
         }
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(menuItem);
     }
-*/
     @Override
     protected void onPause() {
         if (adView != null)
@@ -217,7 +206,7 @@ public class VoiceListener extends ActionBarActivity {
 
     private void playMusic(int itemnumber, String itemname) {
         int resId = 0;
-        if (tabName.equals("tabOff")) {
+        if (tabName.equals("TAB1")) {
             switch (itemnumber) {
                 case 0:
                     resId = R.raw.song01;
@@ -258,7 +247,7 @@ public class VoiceListener extends ActionBarActivity {
                 default:
                     break;
             }
-        } else if (tabName.equals("tabOn")) {
+        } else if (tabName.equals("TAB2")) {
             PATH = null;
             String mp3 = "";
 
@@ -266,12 +255,12 @@ public class VoiceListener extends ActionBarActivity {
                 case 0:
                     mp3 = "Prajnaparamita.mp3";
                     //	PATH="http://sites.google.com/site/androidbuddhavoice/Prajnaparamita.mp3?attredirects=0&d=1";
-                    //	PATH="http://dl.dropbox.com/u/128583/Prajnaparamita.mp3";
+                    //  PATH="http://dl.dropbox.com/u/128583/Prajnaparamita.mp3";
                     break;
                 case 1:
                     mp3 = "XJ0502.mp3";
                     //	PATH="http://sites.google.com/site/androidbuddhavoice/XJ0502.mp3?attredirects=0&d=1";
-                    //	PATH="http://dl.dropbox.com/u/128583/XJ0502.mp3";
+                    //  PATH="http://dl.dropbox.com/u/128583/XJ0502.mp3";
                     break;
                 case 2:
                     mp3 = "great1.mp3";
@@ -294,9 +283,9 @@ public class VoiceListener extends ActionBarActivity {
                     //	PATH="http://dl.dropbox.com/u/128583/LJM093-02-Nian.Mp3";
                     break;
             }
-            if (onlinePreference.equals("google"))
-                PATH = "http://sites.google.com/site/androidbuddhavoice/" + mp3 + "?attredirects=0&d=1";
-            if (onlinePreference.equals("dropbox"))
+            //if (onlinePreference.equals("google"))
+            //    PATH = "http://sites.google.com/site/androidbuddhavoice/" + mp3 + "?attredirects=0&d=1";
+            //if (onlinePreference.equals("dropbox"))
                 PATH = "http://dl.dropbox.com/u/128583/" + mp3;
         }
         stopMusic();
@@ -304,7 +293,7 @@ public class VoiceListener extends ActionBarActivity {
     }
 
     private void startMusic(int resourceID) {
-        if (tabName.equals("tabOn")) {
+        if (tabName.equals("TAB2")) {
             //online version
             Log.d(TAG, "online version=" + PATH);
 

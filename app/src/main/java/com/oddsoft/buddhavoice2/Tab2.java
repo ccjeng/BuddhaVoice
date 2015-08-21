@@ -27,12 +27,12 @@ public class Tab2 extends Fragment {
 
     private ListView listView;
     private String[] song;
-    private ProgressDialog dialog = null;
+    //private ProgressDialog dialog = null;
     private Analytics ga;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.tab2,container,false);
+        View v = inflater.inflate(R.layout.tab2, container, false);
         return v;
     }
 
@@ -80,11 +80,12 @@ public class Tab2 extends Fragment {
         Log.d(TAG, "goIntent-itemnumber: " + Integer.toString(itemnumber));
         Log.d(TAG, "goIntent-itemname: " + itemname.toString());
 
+        bundle.putString("TAB", "TAB2");
         bundle.putString("KEY_NBR", Integer.toString(itemnumber));
         bundle.putString("KEY_NAME", itemname.toString());
         intent.putExtras(bundle);
 
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("Song", itemname.toString());
         startActivityForResult(intent, 0);
     }

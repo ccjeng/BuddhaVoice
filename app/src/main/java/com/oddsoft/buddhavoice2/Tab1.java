@@ -27,7 +27,7 @@ public class Tab1 extends Fragment {
 
     private ListView listView;
     private String[] song;
-    private ProgressDialog dialog = null;
+    //private ProgressDialog dialog = null;
     private Analytics ga;
 
     @Override
@@ -65,7 +65,7 @@ public class Tab1 extends Fragment {
 
             }
         });
-        listView.setSelection(0);
+        //listView.setSelection(0);
 
     }
 
@@ -80,6 +80,7 @@ public class Tab1 extends Fragment {
         Log.d(TAG, "goIntent-itemnumber: " + Integer.toString(itemnumber));
         Log.d(TAG, "goIntent-itemname: " + itemname.toString());
 
+        bundle.putString("TAB", "TAB1");
         bundle.putString("KEY_NBR", Integer.toString(itemnumber));
         bundle.putString("KEY_NAME", itemname.toString());
         intent.putExtras(bundle);

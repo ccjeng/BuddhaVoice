@@ -1,77 +1,80 @@
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drw_layout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".VoiceListener">
 
-        <LinearLayout
-            android:id="@+id/LinearLayoutMainAD"
-            android:layout_width="wrap_content"
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-            <include
-                android:id="@+id/tool_bar"
-                layout="@layout/tool_bar"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_alignParentTop="true"
-                />
+                android:orientation="vertical">
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip"
+                android:text="@string/playing_title"
+                android:textSize="18sp" />
 
+            <TextView
+                android:id="@+id/songname"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/songcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:autoText="false"
+                android:padding="10dip"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/songinfo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip"
+                android:textSize="15sp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- Footer aligned to bottom -->
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center">
             <com.google.android.gms.ads.AdView
                 android:id="@+id/adView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
                 ads:adSize="SMART_BANNER"
-                ads:adUnitId="ca-app-pub-6914084100751028/3615464018">
-            </com.google.android.gms.ads.AdView>
+                ads:adUnitId="ca-app-pub-6914084100751028/3615464018"/>
+        </RelativeLayout>
 
-            <TextView android:id="@+id/status"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:padding="10dip"
-				android:textSize="18sp"
-				android:text="@string/playing_title" 
-			    />
-			<TextView android:id="@+id/songname"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:padding="10dip"
-				android:textSize="18sp" />
-
-			<TextView android:id="@+id/songcontent"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:padding="10dip"
-				android:textSize="18sp"
-                android:autoText="false" />
-
-			<TextView android:id="@+id/songinfo"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:padding="10dip"
-				android:textSize="15sp"
-			    />
-        </LinearLayout>
-
-    <LinearLayout android:id="@+id/llv_left_drawer"
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:orientation="vertical"
-        android:background="#ffffff" >
-
-        <ListView android:id="@+id/lsv_drawer_menu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:choiceMode="singleChoice"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dp" />
     </LinearLayout>
 
-</android.support.v4.widget.DrawerLayout>
+
+</RelativeLayout>

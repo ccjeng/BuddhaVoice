@@ -41,9 +41,6 @@ import java.util.Map;
 
 public class MainActivity extends ActionBarActivity {
     private static final String TAG = "BuddhaVoice";
-    private ListView listView;
-
-    private String[] song;
     private ProgressDialog dialog = null;
 
     private DrawerLayout mDrawerLayout;
