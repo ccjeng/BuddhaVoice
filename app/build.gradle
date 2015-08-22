@@ -7,7 +7,7 @@ android {
         applicationId "com.oddsoft.buddhavoice2"
         minSdkVersion 10
         targetSdkVersion 21
-        versionCode 15
+        versionCode 16
         versionName '2.0.1'
     }
     buildTypes {

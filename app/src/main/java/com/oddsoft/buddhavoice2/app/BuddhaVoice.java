@@ -25,7 +25,6 @@ public class BuddhaVoice extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
     }
 
 

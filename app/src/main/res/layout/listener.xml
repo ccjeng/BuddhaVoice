@@ -6,17 +6,16 @@
     android:orientation="vertical"
     tools:context=".VoiceListener">
 
-    <include
-        android:id="@+id/tool_bar"
-        layout="@layout/tool_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
 
         <ScrollView
             android:layout_width="fill_parent"
@@ -32,14 +31,15 @@
                 android:layout_height="wrap_content"
                 android:padding="10dip"
                 android:text="@string/playing_title"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/songname"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dip"
-                android:textSize="18sp" />
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <TextView
                 android:id="@+id/songcontent"
@@ -47,14 +47,14 @@
                 android:layout_height="wrap_content"
                 android:autoText="false"
                 android:padding="10dip"
-                android:textSize="18sp" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/songinfo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dip"
-                android:textSize="15sp" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
         </ScrollView>
 
