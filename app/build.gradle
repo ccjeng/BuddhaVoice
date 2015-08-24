@@ -25,5 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.google.android.gms:play-services:7.0.0'
     compile 'com.jakewharton:butterknife:7.0.1'
-
+    compile 'com.mikepenz:iconics-core:1.7.3@aar'
+    compile 'com.mikepenz:google-material-typeface:1.2.0.1@aar'
 }

@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
@@ -36,16 +37,27 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import com.google.android.gms.ads.*;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
+import com.mikepenz.iconics.IconicsDrawable;
 import com.oddsoft.buddhavoice2.app.Analytics;
 import com.oddsoft.buddhavoice2.app.BuddhaVoice;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class VoiceListener extends ActionBarActivity {
     private static final String TAG = "VoiceListener";
     private MediaPlayer mp;
-    private TextView statusTextView;
-    private TextView songnameTextView;
-    private TextView songcontentTextView;
-    private TextView songinfoTextView;
+
+    @Bind(R.id.songname)
+    TextView songnameTextView;
+
+    @Bind(R.id.songcontent)
+    TextView songcontentTextView;
+
+    @Bind(R.id.songinfo)
+    TextView songinfoTextView;
+    
     private String[] songInfo, songInfo1;
     private String[] songContent, songContent1;
     private String tabName;
@@ -55,21 +67,24 @@ public class VoiceListener extends ActionBarActivity {
 
     private AdView adView;
     private Analytics ga;
-    final Handler updateHandler = new Handler();
-    private Toolbar toolbar;
+
+    @Bind(R.id.tool_bar)
+    Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.listener);
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //toolbar.setNavigationIcon(android.R.drawable.ic_menu_close_clear_cancel);
-        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        //toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        toolbar.setNavigationIcon(new IconicsDrawable(this)
+                .icon(GoogleMaterial.Icon.gmd_arrow_back)
+                .color(Color.WHITE)
+                .actionBarSize());
 
         // Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
         toolbar.setOnMenuItemClickListener(onMenuItemClick);
@@ -117,10 +132,6 @@ public class VoiceListener extends ActionBarActivity {
     }
 
     private void findViews() {
-        statusTextView = (TextView) findViewById(R.id.status);
-        songnameTextView = (TextView) findViewById(R.id.songname);
-        songcontentTextView = (TextView) findViewById(R.id.songcontent);
-        songinfoTextView = (TextView) findViewById(R.id.songinfo);
         songInfo = getResources().getStringArray(R.array.itemSongsInfo);
         songContent = getResources().getStringArray(R.array.itemSongsCont);
         songInfo1 = getResources().getStringArray(R.array.itemSongsInfo1);
@@ -130,7 +141,7 @@ public class VoiceListener extends ActionBarActivity {
     private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
-            String msg = "";
+
             switch (menuItem.getItemId()) {
                 case android.R.id.home:
                     finish();
@@ -150,9 +161,6 @@ public class VoiceListener extends ActionBarActivity {
                     break;
             }
 
-            if(!msg.equals("")) {
-                //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-            }
             return true;
         }
     };
@@ -161,6 +169,13 @@ public class VoiceListener extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_listener, menu);
+
+        MenuItem menuItem1 = menu.findItem(R.id.stop_button);
+        menuItem1.setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_stop).actionBarSize().color(Color.WHITE));
+
+        MenuItem menuItem2 = menu.findItem(R.id.pause_button);
+        menuItem2.setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_pause).actionBarSize().color(Color.WHITE));
+
         return true;
     }
 

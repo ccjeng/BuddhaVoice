@@ -1,12 +1,12 @@
 package com.oddsoft.buddhavoice2;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -21,32 +21,38 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
+import com.mikepenz.iconics.IconicsDrawable;
 import com.oddsoft.buddhavoice2.app.Analytics;
 import com.oddsoft.buddhavoice2.app.BuddhaVoice;
+import com.oddsoft.buddhavoice2.app.DrawerItem;
+import com.oddsoft.buddhavoice2.app.DrawerItemAdapter;
 import com.oddsoft.buddhavoice2.app.SlidingTabLayout;
 import com.oddsoft.buddhavoice2.app.ViewPagerAdapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
 public class MainActivity extends ActionBarActivity {
     private static final String TAG = "BuddhaVoice";
     private ProgressDialog dialog = null;
 
-    private DrawerLayout mDrawerLayout;
+    @Bind(R.id.drw_layout)
+    DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-    private LinearLayout mLlvDrawerContent;
-    private ListView mLsvDrawerMenu;
+
+    @Bind(R.id.llv_left_drawer)
+    LinearLayout mLlvDrawerContent;
+
+    @Bind(R.id.lsv_drawer_menu)
+    ListView mLsvDrawerMenu;
 
     // 記錄被選擇的選單指標用
     private int mCurrentMenuItemPosition = -1;
@@ -54,16 +60,24 @@ public class MainActivity extends ActionBarActivity {
     private Analytics ga;
 
     private ActionBar actionbar;
-    private Toolbar toolbar;
-    private ViewPager pager;
+
+    @Bind(R.id.tool_bar)
+    Toolbar toolbar;
+
+    @Bind(R.id.pager)
+    ViewPager pager;
+
     private ViewPagerAdapter adapter;
-    private SlidingTabLayout tabs;
+
+    @Bind(R.id.tabs)
+    SlidingTabLayout tabs;
     int Numboftabs =2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         ga = new Analytics();
         ga.trackerPage(this);
@@ -78,11 +92,9 @@ public class MainActivity extends ActionBarActivity {
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
 
         // Assigning ViewPager View and setting the adapter
-        pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
 
         // Assiging the Sliding Tab Layout View
-        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
 
 
@@ -130,28 +142,16 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void initActionBar(){
-
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        //set home icon
-        //toolbar.setLogo(R.drawable.icon);
         setSupportActionBar(toolbar);
-
-        toolbar.setNavigationIcon(R.drawable.ic_drawer);
+        toolbar.setNavigationIcon(new IconicsDrawable(this)
+                .icon(GoogleMaterial.Icon.gmd_menu)
+                .color(Color.WHITE)
+                .actionBarSize());
 
         actionbar = getSupportActionBar();
-
-
-        //actionbar.setTitle("這是 Toolbar 標題");
-
-
-        //顯示 Up Button (位在 Logo 左手邊的按鈕圖示)
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-        //打開 Up Button 的點擊功能
-        //getActionBar().setHomeButtonEnabled(true);
     }
 
     private void initDrawer() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drw_layout);
         // 設定 Drawer 的影子
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
@@ -165,15 +165,14 @@ public class MainActivity extends ActionBarActivity {
             //被打開後要做的事情
             @Override
             public void onDrawerOpened(View drawerView) {
-                // 將 Title 設定為自定義的文字
+                super.onDrawerOpened(drawerView);
                 actionbar.setTitle(R.string.app_name);
-
             }
 
             //被關上後要做的事情
             @Override
             public void onDrawerClosed(View drawerView) {
-                // 將 Title 設定回 APP 的名稱
+                super.onDrawerClosed(drawerView);
                 actionbar.setTitle(R.string.app_name);
             }
         };
@@ -186,27 +185,21 @@ public class MainActivity extends ActionBarActivity {
 
         String[] drawer_menu = this.getResources().getStringArray(R.array.drawer_menu);
 
-        // 定義新宣告的兩個物件：選項清單的 ListView 以及 Drawer內容的 LinearLayou
-        mLsvDrawerMenu = (ListView) findViewById(R.id.lsv_drawer_menu);
-        mLlvDrawerContent = (LinearLayout) findViewById(R.id.llv_left_drawer);
+        DrawerItem[] drawerItem = new DrawerItem[2];
 
-        int[] iconImage = { android.R.drawable.ic_menu_preferences, android.R.drawable.ic_dialog_info };
+        drawerItem[0] = new DrawerItem(new IconicsDrawable(this)
+                .icon(GoogleMaterial.Icon.gmd_build)
+                .color(Color.WHITE)
+                .sizeDp(24),
+                drawer_menu[0]);
+        drawerItem[1] = new DrawerItem(new IconicsDrawable(this)
+                .icon(GoogleMaterial.Icon.gmd_info)
+                .color(Color.WHITE)
+                .sizeDp(24),
+                drawer_menu[1]);
 
-        List<HashMap<String,String>> lstData = new ArrayList<HashMap<String,String>>();
-        for (int i = 0; i < iconImage.length; i++) {
-            HashMap<String, String> mapValue = new HashMap<String, String>();
-            mapValue.put("icon", Integer.toString(iconImage[i]));
-            mapValue.put("title", drawer_menu[i]);
-            lstData.add(mapValue);
-        }
-
-
-        SimpleAdapter adapter = new SimpleAdapter(this, lstData
-                , R.layout.drawer_item
-                , new String[]{"icon", "title"}
-                , new int[]{R.id.rowIcon, R.id.rowText});
+        DrawerItemAdapter adapter = new DrawerItemAdapter(this, R.layout.drawer_item, drawerItem);
         mLsvDrawerMenu.setAdapter(adapter);
-
         // 當清單選項的子物件被點擊時要做的動作
         mLsvDrawerMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
