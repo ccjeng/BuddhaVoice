@@ -4,7 +4,7 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:layout_height="wrap_content"
-    android:background="@color/color_primary"
+    android:background="@color/color_drawer_background"
     android:orientation="horizontal">
 
     <ImageView
@@ -22,7 +22,6 @@
         android:paddingTop="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:textColor="@color/color_primaryText"
         android:id="@+id/rowText" />
 
 </LinearLayout>

@@ -189,12 +189,12 @@ public class MainActivity extends ActionBarActivity {
 
         drawerItem[0] = new DrawerItem(new IconicsDrawable(this)
                 .icon(GoogleMaterial.Icon.gmd_build)
-                .color(Color.WHITE)
+                .color(Color.GRAY)
                 .sizeDp(24),
                 drawer_menu[0]);
         drawerItem[1] = new DrawerItem(new IconicsDrawable(this)
                 .icon(GoogleMaterial.Icon.gmd_info)
-                .color(Color.WHITE)
+                .color(Color.GRAY)
                 .sizeDp(24),
                 drawer_menu[1]);
 
