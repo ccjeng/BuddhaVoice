@@ -27,6 +27,7 @@ public class Prefs extends PreferenceActivity{
 		//other preference initialization
 
 		mActionBar.setTitle(getTitle());
+		mActionBar.setTitleTextColor(Color.WHITE);
 
 	}
 
