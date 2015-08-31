@@ -19,16 +19,9 @@ public class Prefs extends PreferenceActivity{
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		//getActionBar().setDisplayHomeAsUpEnabled(true);
-
 		addPreferencesFromResource(R.xml.settings);
-
-		//other preference initialization
-
 		mActionBar.setTitle(getTitle());
 		mActionBar.setTitleTextColor(Color.WHITE);
-
 	}
 
 	@Override
