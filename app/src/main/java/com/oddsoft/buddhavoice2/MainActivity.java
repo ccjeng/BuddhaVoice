@@ -25,6 +25,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.oddsoft.buddhavoice2.app.Analytics;
@@ -222,17 +224,17 @@ public class MainActivity extends ActionBarActivity {
                 break;
             case 1:
                 //show about message
-                new AlertDialog.Builder(this)
-                        .setTitle(R.string.about_title)
-                        .setMessage(R.string.about_text)
-                        .setPositiveButton(R.string.ok_label,
-                                new DialogInterface.OnClickListener(){
-                                    public void onClick(
-                                            DialogInterface dialoginterface, int i){
-                                        //empty
-                                    }
-                                })
-                        .show();
+                new LibsBuilder()
+                        //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
+                        .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                        .withAboutIconShown(true)
+                        .withAboutVersionShown(true)
+                        .withAboutAppName(getString(R.string.app_name))
+                        .withActivityTitle(getString(R.string.about_title))
+                        .withAboutDescription(getString(R.string.license))
+                                //start the activity
+                        .start(this);
+
                 break;
         }
 

@@ -24,6 +24,11 @@
 	<string name="tab1">離線版</string>
 	<string name="tab2">網路版</string>
 
+	<string name="license"><Data><![CDATA[Copyright (c) 2015 ccjeng@google.com<br/><br/>
+    <br/>佛音是一款手持念佛機，佛曲來源為<a href=http://www.buda.idv.tw/db.asp?node=105>真言咒語佛學多媒體資料庫</a>，歡迎廣為流傳，願以此功德迴向法界一切眾生
+    <br/>
+    ]]></Data></string>
+
 	<string name="about_text">佛音是一款手持念佛機，佛曲來源為真言咒語佛學多媒體資料庫，歡迎廣為流傳，願以此功德迴向法界一切眾生。</string>
 	<string name="preference">設定</string>
 	<string name="pref_lang">語言設定</string>
