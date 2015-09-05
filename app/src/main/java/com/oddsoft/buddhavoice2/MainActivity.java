@@ -44,7 +44,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends ActionBarActivity {
     private static final String TAG = "BuddhaVoice";
-    private ProgressDialog dialog = null;
 
     @Bind(R.id.drw_layout)
     DrawerLayout mDrawerLayout;
@@ -311,8 +310,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (dialog != null)
-            dialog.dismiss();
+        getPrefs();
     }
 
 }

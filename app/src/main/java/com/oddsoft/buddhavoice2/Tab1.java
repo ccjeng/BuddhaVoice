@@ -1,6 +1,5 @@
 package com.oddsoft.buddhavoice2;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,7 +26,6 @@ public class Tab1 extends Fragment {
 
     private ListView listView;
     private String[] song;
-    //private ProgressDialog dialog = null;
     private Analytics ga;
 
     @Override
@@ -50,22 +48,9 @@ public class Tab1 extends Fragment {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                //dialog = ProgressDialog.show(MainActivity.this, "", getString(R.string.loading), true, true);
-                new Thread() {
-                    public void run() {
-                        try {
-                            goIntent(position, song[position]);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        } finally {
-                            //dialog.dismiss();
-                        }
-                    }
-                }.start();
-
+                goIntent(position, song[position]);
             }
         });
-        //listView.setSelection(0);
 
     }
 

@@ -22,6 +22,7 @@
     <color name="color_primaryText">@android:color/white</color>
     <color name="color_drawer_background">@android:color/white</color>
     <color name="tabsScrollColor">@color/md_blue_800</color>
+    <color name="color_progress">#1E88E5</color>
 
   <color name="contents_text">#ff000000</color>
   <color name="encode_view">#ffffffff</color>
