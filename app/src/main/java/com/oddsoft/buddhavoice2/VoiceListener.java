@@ -71,7 +71,7 @@ public class VoiceListener extends ActionBarActivity {
         toolbar.setNavigationIcon(new IconicsDrawable(this)
                 .icon(GoogleMaterial.Icon.gmd_arrow_back)
                 .color(Color.WHITE)
-                .actionBarSize());
+                .actionBar());
 
         // Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
         toolbar.setOnMenuItemClickListener(onMenuItemClick);

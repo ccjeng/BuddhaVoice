@@ -147,7 +147,7 @@ public class MainActivity extends ActionBarActivity {
         toolbar.setNavigationIcon(new IconicsDrawable(this)
                 .icon(GoogleMaterial.Icon.gmd_menu)
                 .color(Color.WHITE)
-                .actionBarSize());
+                .actionBar());
 
         actionbar = getSupportActionBar();
     }
