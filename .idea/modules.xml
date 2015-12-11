@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BuddhaVoice.iml" filepath="$PROJECT_DIR$/BuddhaVoice.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mm-ad-sdk-6.0.0/mm-ad-sdk-6.0.0.iml" filepath="$PROJECT_DIR$/mm-ad-sdk-6.0.0/mm-ad-sdk-6.0.0.iml" />
     </modules>
   </component>
 </project>
-

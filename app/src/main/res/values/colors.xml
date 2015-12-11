@@ -15,14 +15,22 @@
  limitations under the License.
  -->
 <resources>
+    <color name="colorPrimary">@color/md_blue_500</color>
+    <color name="colorPrimaryDark">@color/md_blue_700</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="colorAccent">@color/md_blue_800</color>
+    <color name="tabsScrollColor">@color/md_blue_800</color>
+    <color name="color_progress">#1E88E5</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="color_drawer_background">@android:color/white</color>
 
+<!--
     <color name="color_primary">@color/md_blue_500</color>
     <color name="color_primaryDark">@color/md_blue_700</color>
     <color name="color_accent">@color/md_blue_500</color>
     <color name="color_primaryText">@android:color/white</color>
-    <color name="color_drawer_background">@android:color/white</color>
-    <color name="tabsScrollColor">@color/md_blue_800</color>
-    <color name="color_progress">#1E88E5</color>
+
 
   <color name="contents_text">#ff000000</color>
   <color name="encode_view">#ffffffff</color>
@@ -47,6 +55,6 @@
   <color name="viewfinder_frame">#ff000000</color>
   <color name="viewfinder_laser">#ffff0000</color>
   <color name="viewfinder_mask">#60000000</color>
-
+-->
 
 </resources>

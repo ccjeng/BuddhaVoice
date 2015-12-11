@@ -11,14 +11,6 @@
     <string name="loading">Loading</string>
     <string name="playing_title">今すぐ再生 ..</string>
     <string name="about_subject">について仏の声 Buddha Voice</string>
-	<string name="open_left_drawer">Open Drawer</string>
-	<string name="open_right_drawer">Open Right Drawer</string>
-	<string name="close_left_drawer">Open Drawer</string>
-
-	<string-array name="drawer_menu">
-		<item>配置</item>
-		<item>について</item>
-	</string-array>
 
 	<string name="tab1">オンライン</string>
 	<string name="tab2">オフライン</string>

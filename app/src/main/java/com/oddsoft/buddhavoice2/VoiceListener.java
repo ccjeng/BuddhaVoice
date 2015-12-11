@@ -14,9 +14,10 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -32,7 +33,7 @@ import com.oddsoft.buddhavoice2.app.BuddhaVoice;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class VoiceListener extends ActionBarActivity {
+public class VoiceListener extends AppCompatActivity {
     private static final String TAG = "VoiceListener";
     private MediaPlayer mp;
 
@@ -159,10 +160,10 @@ public class VoiceListener extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_listener, menu);
 
         MenuItem menuItem1 = menu.findItem(R.id.stop_button);
-        menuItem1.setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_stop).actionBarSize().color(Color.WHITE));
+        menuItem1.setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_stop).actionBar().color(Color.WHITE));
 
         MenuItem menuItem2 = menu.findItem(R.id.pause_button);
-        menuItem2.setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_pause).actionBarSize().color(Color.WHITE));
+        menuItem2.setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_pause).actionBar().color(Color.WHITE));
 
         return true;
     }
@@ -380,18 +381,12 @@ public class VoiceListener extends ActionBarActivity {
     }
 
     private boolean isNetworkAvailable() {
-        final ConnectivityManager connMgr = (ConnectivityManager)
-                this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        final android.net.NetworkInfo wifi =
-                connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        ConnectivityManager connMgr = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        final android.net.NetworkInfo mobile =
-                connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        if (wifi.isAvailable()) {
-            return true;
-        } else if (mobile.isAvailable()) {
+        if (networkInfo != null && networkInfo.isConnected()) {
             return true;
         } else {
             return false;

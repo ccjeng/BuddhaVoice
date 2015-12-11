@@ -33,7 +33,7 @@ public class Prefs extends PreferenceActivity{
 		mActionBar.setNavigationIcon(new IconicsDrawable(this)
 				.icon(GoogleMaterial.Icon.gmd_arrow_back)
 				.color(Color.WHITE)
-				.actionBarSize());
+				.actionBar());
 
 		mActionBar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

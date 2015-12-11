@@ -1,28 +1,24 @@
 package com.oddsoft.buddhavoice2;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.mikepenz.aboutlibraries.Libs;
@@ -31,10 +27,6 @@ import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.oddsoft.buddhavoice2.app.Analytics;
 import com.oddsoft.buddhavoice2.app.BuddhaVoice;
-import com.oddsoft.buddhavoice2.app.DrawerItem;
-import com.oddsoft.buddhavoice2.app.DrawerItemAdapter;
-import com.oddsoft.buddhavoice2.app.SlidingTabLayout;
-import com.oddsoft.buddhavoice2.app.ViewPagerAdapter;
 
 import java.util.Locale;
 
@@ -42,36 +34,29 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "BuddhaVoice";
 
-    @Bind(R.id.drw_layout)
-    DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
+    @Bind(R.id.navigation)
+    NavigationView navigation;
 
-    @Bind(R.id.llv_left_drawer)
-    LinearLayout mLlvDrawerContent;
+    @Bind(R.id.drawerlayout)
+    DrawerLayout drawerLayout;
 
-    @Bind(R.id.lsv_drawer_menu)
-    ListView mLsvDrawerMenu;
-
-    // 記錄被選擇的選單指標用
-    private int mCurrentMenuItemPosition = -1;
-
-    private Analytics ga;
-
-    private ActionBar actionbar;
-
-    @Bind(R.id.tool_bar)
-    Toolbar toolbar;
+    @Bind(R.id.tabs)
+    TabLayout tabs;
 
     @Bind(R.id.pager)
     ViewPager pager;
 
+    private Analytics ga;
+
+    @Bind(R.id.tool_bar)
+    Toolbar toolbar;
+
+
     private ViewPagerAdapter adapter;
 
-    @Bind(R.id.tabs)
-    SlidingTabLayout tabs;
     int Numboftabs =2;
 
     @Override
@@ -85,8 +70,11 @@ public class MainActivity extends ActionBarActivity {
 
         initActionBar();
         initDrawer();
-        initDrawerList();
 
+        pager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+        tabs.setupWithViewPager(pager);
+
+/*
         CharSequence Titles[]={getString(R.string.tab1),getString(R.string.tab2)};
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
@@ -109,6 +97,7 @@ public class MainActivity extends ActionBarActivity {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
+        */
 
     }
 
@@ -148,113 +137,55 @@ public class MainActivity extends ActionBarActivity {
                 .icon(GoogleMaterial.Icon.gmd_menu)
                 .color(Color.WHITE)
                 .actionBar());
-
-        actionbar = getSupportActionBar();
     }
 
     private void initDrawer() {
-        // 設定 Drawer 的影子
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,
-                mDrawerLayout,    // 讓 Drawer Toggle 知道母體介面是誰
-                R.drawable.ic_drawer, // Drawer 的 Icon
-                R.string.app_name, // Drawer 被打開時的描述
-                R.string.app_name // Drawer 被關閉時的描述
-        ) {
-            //被打開後要做的事情
+        navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                actionbar.setTitle(R.string.app_name);
-            }
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                switch (id) {
+                    case R.id.navSetting:
+                        startActivity(new Intent(MainActivity.this, Prefs.class));
+                        break;
+                    case R.id.navAbout:
+                        new LibsBuilder()
+                                //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
+                                .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                                .withAboutIconShown(true)
+                                .withAboutVersionShown(true)
+                                .withAboutAppName(getString(R.string.app_name))
+                                .withActivityTitle(getString(R.string.about_title))
+                                .withAboutDescription(getString(R.string.license))
+                                        //start the activity
+                                .start(MainActivity.this);
+                        break;
 
-            //被關上後要做的事情
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                actionbar.setTitle(R.string.app_name);
-            }
-        };
-
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-    }
-
-    private void initDrawerList() {
-
-        String[] drawer_menu = this.getResources().getStringArray(R.array.drawer_menu);
-
-        DrawerItem[] drawerItem = new DrawerItem[2];
-
-        drawerItem[0] = new DrawerItem(new IconicsDrawable(this)
-                .icon(GoogleMaterial.Icon.gmd_build)
-                .color(Color.GRAY)
-                .sizeDp(24),
-                drawer_menu[0]);
-        drawerItem[1] = new DrawerItem(new IconicsDrawable(this)
-                .icon(GoogleMaterial.Icon.gmd_info)
-                .color(Color.GRAY)
-                .sizeDp(24),
-                drawer_menu[1]);
-
-        DrawerItemAdapter adapter = new DrawerItemAdapter(this, R.layout.drawer_item, drawerItem);
-        mLsvDrawerMenu.setAdapter(adapter);
-        // 當清單選項的子物件被點擊時要做的動作
-        mLsvDrawerMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                selectMenuItem(position);
+                }
+                return false;
             }
         });
 
+        //change navigation drawer item icons
+        navigation.getMenu().findItem(R.id.navSetting).setIcon(new IconicsDrawable(this)
+                .icon(GoogleMaterial.Icon.gmd_settings)
+                .color(Color.GRAY)
+                .sizeDp(24));
+
+        navigation.getMenu().findItem(R.id.navAbout).setIcon(new IconicsDrawable(this)
+                .icon(GoogleMaterial.Icon.gmd_info)
+                .color(Color.GRAY)
+                .sizeDp(24));
     }
-
-
-    private void selectMenuItem(int position) {
-        mCurrentMenuItemPosition = position;
-
-        switch (mCurrentMenuItemPosition) {
-            case 0:
-                startActivity(new Intent(this, Prefs.class));
-                break;
-            case 1:
-                //show about message
-                new LibsBuilder()
-                        //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
-                        .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
-                        .withAboutIconShown(true)
-                        .withAboutVersionShown(true)
-                        .withAboutAppName(getString(R.string.app_name))
-                        .withActivityTitle(getString(R.string.about_title))
-                        .withAboutDescription(getString(R.string.license))
-                                //start the activity
-                        .start(this);
-
-                break;
-        }
-
-        // 將選單的子物件設定為被選擇的狀態
-        mLsvDrawerMenu.setItemChecked(position, true);
-
-        // 關掉 Drawer
-        mDrawerLayout.closeDrawer(mLlvDrawerContent);
-    }
-
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
 
@@ -271,8 +202,10 @@ public class MainActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -311,6 +244,31 @@ public class MainActivity extends ActionBarActivity {
     protected void onPause() {
         super.onPause();
         getPrefs();
+    }
+
+    public class ViewPagerAdapter extends FragmentPagerAdapter {
+
+        private final String[] TITLES = { getString(R.string.tab1), getString(R.string.tab2)};
+
+        public ViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return TITLES[position];
+        }
+
+        @Override
+        public int getCount() {
+            return TITLES.length;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return TabFragment.newInstance(position);
+        }
+
     }
 
 }

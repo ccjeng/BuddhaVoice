@@ -12,12 +12,17 @@
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/tool_bar"
-            layout="@layout/tool_bar"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true" />
+            android:theme="@style/AppTheme.AppBarOverlay">
+            <include
+                android:id="@+id/tool_bar"
+                layout="@layout/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </android.support.design.widget.AppBarLayout>
+
 
         <ScrollView
             android:layout_width="fill_parent"
@@ -40,7 +45,6 @@
                     android:id="@+id/songcontent"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:autoText="false"
                     android:padding="10dip"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 

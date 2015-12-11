@@ -1,6 +1,8 @@
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drw_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -10,43 +12,44 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/tool_bar"
-            layout="@layout/tool_bar"
-            android:layout_height="wrap_content"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_alignParentTop="true"
-            />
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+            <include
+                android:id="@+id/tool_bar"
+                layout="@layout/tool_bar"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                />
 
-        <com.oddsoft.buddhavoice2.app.SlidingTabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="2dp"
-            android:background="@color/color_primary" />
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/MyCustomTabLayout"
+                app:tabGravity="fill"
+                app:tabMaxWidth="0dp"
+                app:tabMode="fixed" />
+        </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            />
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
 
     </LinearLayout>
 
-    <LinearLayout android:id="@+id/llv_left_drawer"
-        android:layout_width="240dp"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:orientation="vertical"
-        android:background="@color/color_drawer_background" >
-
-        <ListView android:id="@+id/lsv_drawer_menu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:choiceMode="singleChoice"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dp" />
-    </LinearLayout>
+        android:theme="@style/NavigationDrawerStyle"
+        android:background="@color/color_drawer_background"
+        app:itemIconTint="#333"
+        app:itemTextColor="#333"
+        app:menu="@menu/nav_drawer_items" />
 
 </android.support.v4.widget.DrawerLayout>
