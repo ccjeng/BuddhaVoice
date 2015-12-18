@@ -1,1 +1,1 @@
-include ':app', ':mm-ad-sdk-6.0.0'
+include ':app'

@@ -5,6 +5,7 @@ import android.app.Application;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Logger;
 import com.google.android.gms.analytics.Tracker;
+import com.oddsoft.buddhavoice2.BuildConfig;
 import com.oddsoft.buddhavoice2.R;
 
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import java.util.HashMap;
  */
 public class BuddhaVoice extends Application {
     // Debugging switch
-    public static final boolean APPDEBUG = true;
+    public static final boolean APPDEBUG = BuildConfig.DEBUG;
 
     // Debugging tag for the application
     public static final String APPTAG = "BuddhaVoice";
