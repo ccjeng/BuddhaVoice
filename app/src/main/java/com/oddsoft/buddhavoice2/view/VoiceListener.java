@@ -1,10 +1,9 @@
-package com.oddsoft.buddhavoice2;
+package com.oddsoft.buddhavoice2.view;
 
 import java.io.IOException;
 import java.util.Locale;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,18 +16,24 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
-import com.google.android.gms.ads.*;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
-import com.oddsoft.buddhavoice2.app.Analytics;
-import com.oddsoft.buddhavoice2.app.BuddhaVoice;
+import com.oddsoft.buddhavoice2.R;
+import com.oddsoft.buddhavoice2.utils.Analytics;
+import com.oddsoft.buddhavoice2.BuddhaVoice;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,27 +42,29 @@ public class VoiceListener extends AppCompatActivity {
     private static final String TAG = "VoiceListener";
     private MediaPlayer mp;
 
-    @Bind(R.id.songname)
-    TextView songnameTextView;
-
     @Bind(R.id.songcontent)
     TextView songcontentTextView;
 
     @Bind(R.id.songinfo)
     TextView songinfoTextView;
 
+    @Bind(R.id.main)
+    NestedScrollView mainScollView;
+
     private String[] songInfo, songInfo1;
     private String[] songContent, songContent1;
     private String tabName;
     private String PATH;
     private String onlinePreference;
-    private ProgressDialog dialog = null;
 
     private AdView adView;
     private Analytics ga;
 
-    @Bind(R.id.tool_bar)
+    @Bind(R.id.toolbar)
     Toolbar toolbar;
+
+    @Bind(R.id.progress_wheel)
+    ProgressWheel progressWheel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,15 +73,15 @@ public class VoiceListener extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
-        //toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationIcon(new IconicsDrawable(this)
                 .icon(GoogleMaterial.Icon.gmd_arrow_back)
                 .color(Color.WHITE)
                 .actionBar());
 
-        // Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
         toolbar.setOnMenuItemClickListener(onMenuItemClick);
 
         ga = new Analytics();
@@ -90,7 +97,7 @@ public class VoiceListener extends AppCompatActivity {
         ADView();
 
         //show song name
-        songnameTextView.setText(itemName);
+        getSupportActionBar().setTitle(itemName);
         if (tabName.equals("TAB1")) {
             songinfoTextView.setText(songInfo[itemNumber]);
             songcontentTextView.setText(songContent[itemNumber]);
@@ -101,21 +108,7 @@ public class VoiceListener extends AppCompatActivity {
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-        dialog = ProgressDialog.show(VoiceListener.this, "", getString(R.string.loading), true, true);
-
-        new Thread() {
-            public void run() {
-                try {
-                    //play music
-                    playMusic(itemNumber, itemName);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    dialog.dismiss();
-                }
-            }
-        }.start();
+        playMusic(itemNumber, itemName);
 
 
     }
@@ -306,10 +299,34 @@ public class VoiceListener extends AppCompatActivity {
             mp = new MediaPlayer();
             try {
                 if (isNetworkAvailable()) {
-                    mp.setDataSource(PATH);
-                    mp.prepare();
-                    mp.setLooping(true);
-                    mp.start();
+
+                    progressWheel.setVisibility(View.VISIBLE);
+                    mainScollView.setVisibility(View.GONE);
+                    //play music
+                    new Thread() {
+                        public void run() {
+                            try {
+                                //play music
+                                mp.setDataSource(PATH);
+                                mp.prepare();
+                                mp.setLooping(true);
+                                mp.start();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }.start();
+
+                    mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            progressWheel.setVisibility(View.GONE);
+                            mainScollView.setVisibility(View.VISIBLE);
+                        }
+                    });
+
+
                 } else {
                     //network is not available
                     showError();
@@ -317,10 +334,10 @@ public class VoiceListener extends AppCompatActivity {
             } catch (IllegalStateException e) {
                 showError();
                 e.printStackTrace();
-            } catch (IOException e) {
+            } /*catch (IOException e) {
                 showError();
                 e.printStackTrace();
-            }
+            }*/
         } else {
             //offline version
             try {
@@ -371,7 +388,7 @@ public class VoiceListener extends AppCompatActivity {
         if (BuddhaVoice.APPDEBUG) {
             adRequest = new AdRequest.Builder()
                     .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)       // 仿真器
-                    .addTestDevice("7710C21FF2537758BF3F80963477D68E") // 我的 Galaxy Nexus 測試手機
+                    .addTestDevice(BuddhaVoice.ADMob_TestDeviceID) // 我的 Galaxy Nexus 測試手機
                     .build();
         } else {
             adRequest = new AdRequest.Builder().build();
@@ -394,6 +411,9 @@ public class VoiceListener extends AppCompatActivity {
     }
 
     private void showError() {
+        progressWheel.setVisibility(View.GONE);
+        mainScollView.setVisibility(View.VISIBLE);
+
         new AlertDialog.Builder(this)
                 .setTitle(R.string.app_name)
                 .setMessage(R.string.no_connection)

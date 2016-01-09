@@ -1,9 +1,10 @@
-package com.oddsoft.buddhavoice2.app;
+package com.oddsoft.buddhavoice2.utils;
 
 import android.app.Activity;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.oddsoft.buddhavoice2.BuddhaVoice;
 
 /**
  * Created by andycheng on 2015/6/28.

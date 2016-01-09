@@ -7,8 +7,8 @@ android {
         applicationId "com.oddsoft.buddhavoice2"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 22
-        versionName '2.2.1.121815BV'
+        versionCode 23
+        versionName '2.3.1.010916BV'
     }
     buildTypes {
         release {
@@ -24,8 +24,8 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
-    compile 'com.google.android.gms:play-services-analytics:8.3.0'
-    compile 'com.google.android.gms:play-services-ads:8.3.0'
+    compile 'com.google.android.gms:play-services-analytics:8.4.0'
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile('com.mikepenz:aboutlibraries:5.2.1@aar') {
         transitive = true
     }
@@ -38,4 +38,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.mikepenz:iconics-core:1.7.3@aar'
     compile 'com.mikepenz:google-material-typeface:1.2.0.1@aar'
+    compile 'com.pnikosis:materialish-progress:1.5'
 }

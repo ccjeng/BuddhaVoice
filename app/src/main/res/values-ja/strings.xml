@@ -15,7 +15,7 @@
 	<string name="tab1">オンライン</string>
 	<string name="tab2">オフライン</string>
 
-	<string name="license"><Data><![CDATA[Copyright (c) 2015 ccjeng@google.com<br/><br/>
+	<string name="license"><Data><![CDATA[Copyright (c) 2016 ccjeng@google.com<br/><br/>
     <br/>Buddha Voice is an Android buddha box. Music source is from <a href=http://www.buda.idv.tw/db.asp?node=105>Buddha media database</a>. Help you peace and health.
     <br/>
     ]]></Data></string>

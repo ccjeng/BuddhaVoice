@@ -1,4 +1,4 @@
-package com.oddsoft.buddhavoice2;
+package com.oddsoft.buddhavoice2.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,8 +25,9 @@ import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
-import com.oddsoft.buddhavoice2.app.Analytics;
-import com.oddsoft.buddhavoice2.app.BuddhaVoice;
+import com.oddsoft.buddhavoice2.R;
+import com.oddsoft.buddhavoice2.utils.Analytics;
+import com.oddsoft.buddhavoice2.BuddhaVoice;
 
 import java.util.Locale;
 
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Analytics ga;
 
-    @Bind(R.id.tool_bar)
+    @Bind(R.id.toolbar)
     Toolbar toolbar;
 
 
@@ -73,31 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
         pager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         tabs.setupWithViewPager(pager);
-
-/*
-        CharSequence Titles[]={getString(R.string.tab1),getString(R.string.tab2)};
-
-        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
-
-        // Assigning ViewPager View and setting the adapter
-        pager.setAdapter(adapter);
-
-        // Assiging the Sliding Tab Layout View
-        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-
-
-        // Setting Custom Color for the Scroll bar indicator of the Tab View
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.tabsScrollColor);
-            }
-        });
-
-        // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
-        */
 
     }
 
@@ -191,17 +167,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
