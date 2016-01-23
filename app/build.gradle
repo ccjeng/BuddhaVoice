@@ -5,10 +5,10 @@ android {
     buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId "com.oddsoft.buddhavoice2"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 21
-        versionCode 23
-        versionName '2.3.1.010916BV'
+        versionCode 24
+        versionName '2.3.2.012316BV'
     }
     buildTypes {
         release {
