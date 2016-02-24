@@ -19,7 +19,6 @@ public class BuddhaVoice extends Application {
 
     // Debugging tag for the application
     public static final String APPTAG = "BuddhaVoice";
-    public static final String ADMob_TestDeviceID = "DF9E888CAA233DE54A7FD15B3B1A1522";
 
     public BuddhaVoice() {
     }

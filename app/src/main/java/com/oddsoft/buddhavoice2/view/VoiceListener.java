@@ -23,9 +23,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -33,6 +35,7 @@ import com.mikepenz.iconics.IconicsDrawable;
 import com.oddsoft.buddhavoice2.R;
 import com.oddsoft.buddhavoice2.utils.Analytics;
 import com.oddsoft.buddhavoice2.BuddhaVoice;
+import com.oddsoft.buddhavoice2.utils.Constant;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import butterknife.Bind;
@@ -381,20 +384,29 @@ public class VoiceListener extends AppCompatActivity {
     }
 
     private void ADView() {
-        adView = (AdView) findViewById(R.id.adView);
+
+        LinearLayout adBannerLayout = (LinearLayout) findViewById(R.id.footerLayout);
+
+        adView = new AdView(this);
+        adView.setAdUnitId(Constant.ADMob_BuddhaVoice);
+        adView.setAdSize(AdSize.SMART_BANNER);
+        adBannerLayout.addView(adView);
 
         AdRequest adRequest;
 
         if (BuddhaVoice.APPDEBUG) {
+            //Test Mode
             adRequest = new AdRequest.Builder()
-                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)       // 仿真器
-                    .addTestDevice(BuddhaVoice.ADMob_TestDeviceID) // 我的 Galaxy Nexus 測試手機
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .addTestDevice(Constant.ADMob_TestDeviceID)
                     .build();
         } else {
-            adRequest = new AdRequest.Builder().build();
-        }
 
+            adRequest = new AdRequest.Builder().build();
+
+        }
         adView.loadAd(adRequest);
+
     }
 
     private boolean isNetworkAvailable() {

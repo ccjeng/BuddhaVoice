@@ -19,7 +19,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
@@ -28,6 +32,7 @@ import com.mikepenz.iconics.IconicsDrawable;
 import com.oddsoft.buddhavoice2.R;
 import com.oddsoft.buddhavoice2.utils.Analytics;
 import com.oddsoft.buddhavoice2.BuddhaVoice;
+import com.oddsoft.buddhavoice2.utils.Constant;
 
 import java.util.Locale;
 
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.pager)
     ViewPager pager;
 
+    private AdView adView;
     private Analytics ga;
 
     @Bind(R.id.toolbar)
@@ -74,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         pager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         tabs.setupWithViewPager(pager);
-
+        ADView();
     }
 
     private void getPrefs() {
@@ -239,6 +245,32 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             return TabFragment.newInstance(position);
         }
+
+    }
+
+    private void ADView() {
+
+        LinearLayout adBannerLayout = (LinearLayout) findViewById(R.id.footerLayout);
+
+        adView = new AdView(this);
+        adView.setAdUnitId(Constant.ADMob_BuddhaVoiceMain);
+        adView.setAdSize(AdSize.SMART_BANNER);
+        adBannerLayout.addView(adView);
+
+        AdRequest adRequest;
+
+        if (BuddhaVoice.APPDEBUG) {
+            //Test Mode
+            adRequest = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .addTestDevice(Constant.ADMob_TestDeviceID)
+                    .build();
+        } else {
+
+            adRequest = new AdRequest.Builder().build();
+
+        }
+        adView.loadAd(adRequest);
 
     }
 
