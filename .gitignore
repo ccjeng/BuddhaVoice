@@ -36,3 +36,5 @@ proguard/
 # Constant File
 Constant.java
 
+# ignore mp3 files
+raw/
