@@ -38,3 +38,4 @@ Constant.java
 
 # ignore mp3 files
 raw/
+*.mp3
