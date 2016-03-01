@@ -59,14 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
     private AdView adView;
     private Analytics ga;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-
-
-    private ViewPagerAdapter adapter;
-
-    int Numboftabs =2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,10 +113,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initActionBar(){
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(new IconicsDrawable(this)
-                .icon(GoogleMaterial.Icon.gmd_menu)
-                .color(Color.WHITE)
-                .actionBar());
     }
 
     private void initDrawer() {
@@ -171,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 .sizeDp(24));
 
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar
                 ,R.string.app_name, R.string.app_name){
 
             @Override
@@ -214,10 +206,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
