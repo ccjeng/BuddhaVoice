@@ -80,11 +80,6 @@ public class VoiceListener extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        toolbar.setNavigationIcon(new IconicsDrawable(this)
-                .icon(GoogleMaterial.Icon.gmd_arrow_back)
-                .color(Color.WHITE)
-                .actionBar());
-
         toolbar.setOnMenuItemClickListener(onMenuItemClick);
 
         ga = new Analytics();
