@@ -18,7 +18,6 @@
 # Generated files
 bin/
 gen/
-app/
 
 # Gradle files
 .gradle/
