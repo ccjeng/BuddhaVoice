@@ -43,4 +43,5 @@ dependencies {
     compile 'com.mikepenz:iconics-core:2.7.1@aar'
     compile 'com.mikepenz:google-material-typeface:2.2.0.2.original@aar'
     compile 'com.pnikosis:materialish-progress:1.5'
+    compile 'me.majiajie:swipe-back:1.0.0-alpha2'
 }

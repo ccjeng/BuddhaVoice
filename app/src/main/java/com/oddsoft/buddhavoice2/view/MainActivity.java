@@ -1,23 +1,17 @@
 package com.oddsoft.buddhavoice2.view;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Color;
-import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,23 +20,21 @@ import android.widget.LinearLayout;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.analytics.GoogleAnalytics;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
+import com.oddsoft.buddhavoice2.BuddhaVoice;
 import com.oddsoft.buddhavoice2.R;
 import com.oddsoft.buddhavoice2.utils.Analytics;
-import com.oddsoft.buddhavoice2.BuddhaVoice;
 import com.oddsoft.buddhavoice2.utils.Constant;
-
-import java.util.Locale;
+import com.oddsoft.buddhavoice2.view.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private static final String TAG = "BuddhaVoice";
 
     @Bind(R.id.navigation)
@@ -75,40 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
         initActionBar();
         initDrawer();
-
+        setSwipeBackEnable(false);
         pager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         tabs.setupWithViewPager(pager);
         ADView();
-    }
 
-    private void getPrefs() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String langPreference = prefs.getString("lang", "NA");
-        String lang = null;
-        Locale appLoc;
-        if (langPreference.equals("NA")) {
-            appLoc = new Locale(Locale.getDefault().getLanguage());
-        } else if (langPreference.equals("zh_TW")) {
-            lang = langPreference.substring(0, 2).toLowerCase();
-            appLoc = new Locale("zh", "TW");
-        } else if (langPreference.equals("zh_CN")) {
-            lang = langPreference.substring(0, 2).toLowerCase();
-            appLoc = new Locale("zh", "CN");
-        } else {
-            lang = langPreference.substring(0, 2).toLowerCase();
-            appLoc = new Locale(lang);
-        }
-
-        Log.d(TAG, "langPreference=" + langPreference);
-
-        //appLoc = new Locale(lang);
-        if (!langPreference.equals("NA")) {
-            Locale.setDefault(appLoc);
-            Configuration appConfig = new Configuration();
-            appConfig.locale = appLoc;
-            getBaseContext().getResources().updateConfiguration(appConfig,
-                    getBaseContext().getResources().getDisplayMetrics());
-        }
     }
 
     private void initActionBar(){
@@ -187,16 +150,6 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -231,21 +184,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         getPrefs();
-        if (!BuddhaVoice.APPDEBUG)
-            GoogleAnalytics.getInstance(this).reportActivityStart(this);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (!BuddhaVoice.APPDEBUG)
-            GoogleAnalytics.getInstance(this).reportActivityStop(this);
-    }
 
     @Override
     protected void onPause() {
         super.onPause();
+        if (adView != null)
+            adView.pause();
         getPrefs();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adView != null)
+            adView.resume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (adView != null)
+            adView.destroy();
+        super.onDestroy();
     }
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {

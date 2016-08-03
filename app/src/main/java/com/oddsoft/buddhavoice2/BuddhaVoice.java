@@ -5,10 +5,10 @@ import android.app.Application;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Logger;
 import com.google.android.gms.analytics.Tracker;
-import com.oddsoft.buddhavoice2.BuildConfig;
-import com.oddsoft.buddhavoice2.R;
 
 import java.util.HashMap;
+
+import me.majiajie.swipeback.utils.ActivityStack;
 
 /**
  * Created by andycheng on 2015/6/29.
@@ -26,6 +26,7 @@ public class BuddhaVoice extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        this.registerActivityLifecycleCallbacks(ActivityStack.getInstance());
     }
 
 

@@ -1,23 +1,16 @@
 package com.oddsoft.buddhavoice2.view;
 
-import java.io.IOException;
-import java.util.Locale;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -29,19 +22,19 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.analytics.GoogleAnalytics;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
+import com.oddsoft.buddhavoice2.BuddhaVoice;
 import com.oddsoft.buddhavoice2.R;
 import com.oddsoft.buddhavoice2.utils.Analytics;
-import com.oddsoft.buddhavoice2.BuddhaVoice;
 import com.oddsoft.buddhavoice2.utils.Constant;
+import com.oddsoft.buddhavoice2.view.base.BaseActivity;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class VoiceListener extends AppCompatActivity {
+public class VoiceListener extends BaseActivity {
     private static final String TAG = "VoiceListener";
     private MediaPlayer mp;
 
@@ -58,7 +51,7 @@ public class VoiceListener extends AppCompatActivity {
     private String[] songContent, songContent1;
     private String tabName;
     private String PATH;
-    private String onlinePreference;
+    //private String onlinePreference;
 
     private AdView adView;
     private Analytics ga;
@@ -189,16 +182,10 @@ public class VoiceListener extends AppCompatActivity {
         super.onDestroy();
     }
 
-    protected void onStop() {
-        super.onStop();
-        GoogleAnalytics.getInstance(this).reportActivityStop(this);
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
         getPrefs();
-        GoogleAnalytics.getInstance(this).reportActivityStart(this);
     }
 
     private void playMusic(int itemnumber, String itemname) {
@@ -434,35 +421,6 @@ public class VoiceListener extends AppCompatActivity {
                 .show();
     }
 
-    private void getPrefs() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String langPreference = prefs.getString("lang", "NA");
-        onlinePreference = prefs.getString("online", "google");
-        String lang = null;
-
-        Locale appLoc;
-        if (langPreference.equals("NA")) {
-            appLoc = new Locale(Locale.getDefault().getLanguage());
-        } else if (langPreference.equals("zh_TW")) {
-            lang = langPreference.substring(0, 2).toLowerCase();
-            appLoc = new Locale("zh", "TW");
-        } else if (langPreference.equals("zh_CN")) {
-            lang = langPreference.substring(0, 2).toLowerCase();
-            appLoc = new Locale("zh", "CN");
-        } else {
-            lang = langPreference.substring(0, 2).toLowerCase();
-            appLoc = new Locale(lang);
-        }
-
-        Log.d(TAG, "langPreference=" + langPreference);
-        if (!langPreference.equals("NA")) {
-            Locale.setDefault(appLoc);
-            Configuration appConfig = new Configuration();
-            appConfig.locale = appLoc;
-            getBaseContext().getResources().updateConfiguration(appConfig,
-                    getBaseContext().getResources().getDisplayMetrics());
-        }
-    }
 
 }
 
