@@ -1,0 +1,50 @@
+{
+  "project_info": {
+    "project_number": "174872941703",
+    "firebase_url": "https://admob-app-id-2138730814.firebaseio.com",
+    "project_id": "admob-app-id-2138730814",
+    "storage_bucket": "admob-app-id-2138730814.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174872941703:android:259527eef6294849",
+        "android_client_info": {
+          "package_name": "com.oddsoft.buddhavoice2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174872941703-r03lt8lq0n1he15uii63j024reoa6se8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oddsoft.buddhavoice2",
+            "certificate_hash": "3EAA0BCB635617A097A9F9CD87080B557D6C0CF8"
+          }
+        },
+        {
+          "client_id": "174872941703-crkdvmovqv5qc8d2jsaapkfr4kahhrsd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACtP_dgqXUML8gxhQd4ODhDzrAxfzmmdU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

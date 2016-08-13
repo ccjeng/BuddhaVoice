@@ -7,8 +7,8 @@ android {
         applicationId "com.oddsoft.buddhavoice2"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 32
-        versionName '2.3.10.073116BV'
+        versionCode 33
+        versionName '2.4.0.081316BV'
     }
     buildTypes {
         release {
@@ -28,15 +28,17 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:24.1.1'
     compile 'com.android.support:design:24.1.1'
-    compile 'com.google.android.gms:play-services-analytics:9.2.1'
-    compile 'com.google.android.gms:play-services-ads:9.2.1'
+    compile 'com.google.android.gms:play-services-analytics:9.4.0'
+    compile 'com.google.firebase:firebase-core:9.4.0'
+    compile 'com.google.firebase:firebase-ads:9.4.0'
+    compile 'com.google.firebase:firebase-crash:9.4.0'
     compile('com.mikepenz:aboutlibraries:5.7.1@aar') {
         transitive = true
     }
-    compile('com.mopub:mopub-sdk:4.7.0@aar') {
+    compile('com.mopub:mopub-sdk:4.8.0@aar') {
         transitive = true
     }
-    compile 'com.facebook.android:audience-network-sdk:4.12.1'
+    compile 'com.facebook.android:audience-network-sdk:4.14.1'
     compile files('src/main/libs/libAdapterSDKMoPub.jar')
     compile files('src/main/libs/FacebookAdapter.jar')
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -45,3 +47,5 @@ dependencies {
     compile 'com.pnikosis:materialish-progress:1.5'
     compile 'me.majiajie:swipe-back:1.0.0-alpha2'
 }
+
+apply plugin: 'com.google.gms.google-services'
