@@ -3,9 +3,11 @@
     <group android:checkableBehavior="all">
         <item
             android:id="@+id/navSetting"
-            android:title="@string/preference"/>
+            android:title="@string/preference"
+            android:icon="@drawable/ic_cog_wheel_silhouette"/>
         <item
             android:id="@+id/navAbout"
-            android:title="@string/about_title"/>
+            android:title="@string/about_title"
+            android:icon="@drawable/ic_exclamation_sign"/>
     </group>
 </menu>

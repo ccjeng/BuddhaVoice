@@ -8,8 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.mikepenz.google_material_typeface_library.GoogleMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
 import com.oddsoft.buddhavoice2.R;
 
 import butterknife.Bind;
@@ -30,11 +28,8 @@ public class Prefs extends AppCompatActivity {
 		if (getSupportActionBar() != null) {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		}
-		toolbar.setNavigationIcon(new IconicsDrawable(this)
-				.icon(GoogleMaterial.Icon.gmd_arrow_back)
-				.color(Color.WHITE)
-				.actionBar());
 
+		toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24px);
 		toolbar.setTitleTextColor(Color.WHITE);
 
 		FragmentManager manager = getFragmentManager();

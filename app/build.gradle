@@ -26,25 +26,25 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.android.support:design:24.1.1'
-    compile 'com.google.android.gms:play-services-analytics:9.4.0'
-    compile 'com.google.firebase:firebase-core:9.4.0'
-    compile 'com.google.firebase:firebase-ads:9.4.0'
-    compile 'com.google.firebase:firebase-crash:9.4.0'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.google.android.gms:play-services-analytics:9.6.1'
+    compile 'com.google.firebase:firebase-core:9.6.1'
+    compile 'com.google.firebase:firebase-ads:9.6.1'
+    compile 'com.google.firebase:firebase-crash:9.6.1'
     compile('com.mikepenz:aboutlibraries:5.7.1@aar') {
         transitive = true
     }
-    compile('com.mopub:mopub-sdk:4.8.0@aar') {
+    compile('com.mopub:mopub-sdk:4.9.0@aar') {
         transitive = true
     }
-    compile 'com.facebook.android:audience-network-sdk:4.14.1'
+    compile 'com.facebook.android:audience-network-sdk:4.15.0'
     compile files('src/main/libs/libAdapterSDKMoPub.jar')
     compile files('src/main/libs/FacebookAdapter.jar')
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.mikepenz:iconics-core:2.7.1@aar'
-    compile 'com.mikepenz:google-material-typeface:2.2.0.2.original@aar'
-    compile 'com.pnikosis:materialish-progress:1.5'
+   // compile 'com.mikepenz:iconics-core:2.7.1@aar'
+   // compile 'com.mikepenz:google-material-typeface:2.2.0.2.original@aar'
+   // compile 'com.pnikosis:materialish-progress:1.5'
     compile 'me.majiajie:swipe-back:1.0.0-alpha2'
 }
 

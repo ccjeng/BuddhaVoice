@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
@@ -17,19 +16,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.mikepenz.google_material_typeface_library.GoogleMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
 import com.oddsoft.buddhavoice2.BuddhaVoice;
 import com.oddsoft.buddhavoice2.R;
 import com.oddsoft.buddhavoice2.utils.Analytics;
 import com.oddsoft.buddhavoice2.utils.Constant;
 import com.oddsoft.buddhavoice2.view.base.BaseActivity;
-import com.pnikosis.materialishprogress.ProgressWheel;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -60,7 +57,7 @@ public class VoiceListener extends BaseActivity {
     Toolbar toolbar;
 
     @Bind(R.id.progress_wheel)
-    ProgressWheel progressWheel;
+    ProgressBar progressWheel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,13 +139,6 @@ public class VoiceListener extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_listener, menu);
-
-        MenuItem menuItem1 = menu.findItem(R.id.stop_button);
-        menuItem1.setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_stop).actionBar().color(Color.WHITE));
-
-        MenuItem menuItem2 = menu.findItem(R.id.pause_button);
-        menuItem2.setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_pause).actionBar().color(Color.WHITE));
-
         return true;
     }
 

@@ -1,7 +1,6 @@
 package com.oddsoft.buddhavoice2.view;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -22,8 +21,6 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
-import com.mikepenz.google_material_typeface_library.GoogleMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
 import com.oddsoft.buddhavoice2.BuddhaVoice;
 import com.oddsoft.buddhavoice2.R;
 import com.oddsoft.buddhavoice2.utils.Analytics;
@@ -32,7 +29,6 @@ import com.oddsoft.buddhavoice2.view.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "BuddhaVoice";
@@ -113,18 +109,6 @@ public class MainActivity extends BaseActivity {
                 return false;
             }
         });
-
-        //change navigation drawer item icons
-        navigation.getMenu().findItem(R.id.navSetting).setIcon(new IconicsDrawable(this)
-                .icon(GoogleMaterial.Icon.gmd_settings)
-                .color(Color.GRAY)
-                .sizeDp(24));
-
-        navigation.getMenu().findItem(R.id.navAbout).setIcon(new IconicsDrawable(this)
-                .icon(GoogleMaterial.Icon.gmd_info)
-                .color(Color.GRAY)
-                .sizeDp(24));
-
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar
                 ,R.string.app_name, R.string.app_name){
