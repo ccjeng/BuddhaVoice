@@ -7,8 +7,8 @@ android {
         applicationId "com.oddsoft.buddhavoice2"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 33
-        versionName '2.4.0.081316BV'
+        versionCode 34
+        versionName '2.5.0.100416BV'
     }
     buildTypes {
         release {
@@ -42,9 +42,6 @@ dependencies {
     compile files('src/main/libs/libAdapterSDKMoPub.jar')
     compile files('src/main/libs/FacebookAdapter.jar')
     compile 'com.jakewharton:butterknife:7.0.1'
-   // compile 'com.mikepenz:iconics-core:2.7.1@aar'
-   // compile 'com.mikepenz:google-material-typeface:2.2.0.2.original@aar'
-   // compile 'com.pnikosis:materialish-progress:1.5'
     compile 'me.majiajie:swipe-back:1.0.0-alpha2'
 }
 
