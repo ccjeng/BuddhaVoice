@@ -7,8 +7,8 @@ android {
         applicationId "com.oddsoft.buddhavoice2"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 35
-        versionName '2.5.1.110616BV'
+        versionCode 36
+        versionName '2.5.2.120116BV'
     }
     buildTypes {
         release {
@@ -26,12 +26,12 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
-    compile 'com.google.android.gms:play-services-analytics:9.8.0'
-    compile 'com.google.firebase:firebase-core:9.8.0'
-    compile 'com.google.firebase:firebase-ads:9.8.0'
-    compile 'com.google.firebase:firebase-crash:9.8.0'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:design:25.0.1'
+    compile 'com.google.android.gms:play-services-analytics:10.0.1'
+    compile 'com.google.firebase:firebase-core:10.0.1'
+    compile 'com.google.firebase:firebase-ads:10.0.1'
+    compile 'com.google.firebase:firebase-crash:10.0.1'
     compile('com.mikepenz:aboutlibraries:5.8.5@aar') {
         transitive = true
     }
