@@ -260,7 +260,8 @@ public class VoiceListener extends BaseActivity {
             //if (onlinePreference.equals("google"))
             //    PATH = "http://sites.google.com/site/androidbuddhavoice/" + mp3 + "?attredirects=0&d=1";
             //if (onlinePreference.equals("dropbox"))
-                PATH = "http://dl.dropbox.com/u/128583/" + mp3;
+                PATH = "https://dl.dropboxusercontent.com/s/7u8gschi6wksmow/" + mp3;
+                //PATH = "http://www.filefactory.com/stream/23fccglfek8d/great1.mp3";
         }
         stopMusic();
         startMusic(resId);
