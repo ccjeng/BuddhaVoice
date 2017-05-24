@@ -227,32 +227,32 @@ public class VoiceListener extends BaseActivity {
 
             switch (itemnumber) {
                 case 0:
-                    mp3 = "Prajnaparamita.mp3";
+                    mp3 = "glscjg724kuvc3w/Prajnaparamita.mp3?dl=0";
                     //	PATH="http://sites.google.com/site/androidbuddhavoice/Prajnaparamita.mp3?attredirects=0&d=1";
                     //  PATH="http://dl.dropbox.com/u/128583/Prajnaparamita.mp3";
                     break;
                 case 1:
-                    mp3 = "XJ0502.mp3";
+                    mp3 = "lbd1h01nlsw6n48/XJ0502.mp3?dl=0";
                     //	PATH="http://sites.google.com/site/androidbuddhavoice/XJ0502.mp3?attredirects=0&d=1";
                     //  PATH="http://dl.dropbox.com/u/128583/XJ0502.mp3";
                     break;
                 case 2:
-                    mp3 = "great1.mp3";
+                    mp3 = "7u8gschi6wksmow/great1.mp3?dl=0";
                     //	PATH="http://sites.google.com/site/androidbuddhavoice/great1.mp3?attredirects=0&d=1";
                     //	PATH="http://dl.dropbox.com/u/128583/great1.mp3";
                     break;
                 case 3:
-                    mp3 = "great2.mp3";
+                    mp3 = "2q1341am5zrrn8r/great2.mp3?dl=0";
                     //	PATH="http://sites.google.com/site/androidbuddhavoice/great2.mp3?attredirects=0&d=1";
                     //	PATH="http://dl.dropbox.com/u/128583/great2.mp3";
                     break;
                 case 4:
-                    mp3 = "Menla_Mantra.mp3";
+                    mp3 = "mfdpfxhunba2rf7/Menla_Mantra.mp3?dl=0";
                     //	PATH="http://sites.google.com/site/androidbuddhavoice/Menla_Mantra.mp3?attredirects=0&d=1";
                     //	PATH="http://dl.dropbox.com/u/128583/Menla_Mantra.mp3";
                     break;
                 case 5:
-                    mp3 = "LJM093-02-Nian.Mp3";
+                    mp3 = "2znpghtgtct87i5/LJM093-02-Nian.Mp3?dl=0";
                     //	PATH="http://sites.google.com/site/androidbuddhavoice/LJM093-02-Nian.Mp3?attredirects=0&d=1";
                     //	PATH="http://dl.dropbox.com/u/128583/LJM093-02-Nian.Mp3";
                     break;
@@ -260,7 +260,8 @@ public class VoiceListener extends BaseActivity {
             //if (onlinePreference.equals("google"))
             //    PATH = "http://sites.google.com/site/androidbuddhavoice/" + mp3 + "?attredirects=0&d=1";
             //if (onlinePreference.equals("dropbox"))
-                PATH = "https://dl.dropboxusercontent.com/s/7u8gschi6wksmow/" + mp3;
+                PATH = "https://dl.dropboxusercontent.com/s/" + mp3;
+                //PATH="http://sites.google.com/site/androidbuddhavoice/"+mp3+"?attredirects=0&d=1";
                 //PATH = "http://www.filefactory.com/stream/23fccglfek8d/great1.mp3";
         }
         stopMusic();
@@ -283,6 +284,7 @@ public class VoiceListener extends BaseActivity {
                         public void run() {
                             try {
                                 //play music
+                                Log.d(TAG, "PATH=" +PATH);
                                 mp.setDataSource(PATH);
                                 mp.prepare();
                                 mp.setLooping(true);
