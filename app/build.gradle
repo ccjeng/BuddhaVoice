@@ -7,8 +7,8 @@ android {
         applicationId "com.oddsoft.buddhavoice2"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 39
-        versionName '2.5.5.052417BV'
+        versionCode 40
+        versionName '2.5.6.090317BV'
     }
     buildTypes {
         release {
@@ -28,17 +28,22 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
-    compile 'com.google.android.gms:play-services-analytics:10.2.6'
-    compile 'com.google.firebase:firebase-core:10.2.6'
-    compile 'com.google.firebase:firebase-ads:10.2.6'
-    releaseCompile 'com.google.firebase:firebase-crash:10.2.6'
+    compile 'com.google.android.gms:play-services-analytics:11.0.4'
+    compile 'com.google.firebase:firebase-core:11.0.4'
+    compile 'com.google.firebase:firebase-ads:11.0.4'
+    releaseCompile 'com.google.firebase:firebase-crash:11.0.4'
     compile('com.mikepenz:aboutlibraries:5.9.4@aar') {
         transitive = true
     }
-    compile('com.mopub:mopub-sdk:4.13.0@aar') {
+    // For banners
+    compile('com.mopub:mopub-sdk-banner:4.16.1@aar') {
         transitive = true
     }
-    compile 'com.facebook.android:audience-network-sdk:4.20.0'
+    // For native static (images).
+    compile('com.mopub:mopub-sdk-native-static:4.16.1@aar') {
+        transitive = true
+    }
+    compile 'com.facebook.android:audience-network-sdk:4.25.0'
     compile files('src/main/libs/libAdapterSDKMoPub.jar')
     compile files('src/main/libs/FacebookAdapter.jar')
     compile 'com.jakewharton:butterknife:7.0.1'
