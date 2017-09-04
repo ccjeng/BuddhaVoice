@@ -7,7 +7,7 @@ android {
         applicationId "com.oddsoft.buddhavoice2"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 40
+        versionCode 41
         versionName '2.5.6.090317BV'
     }
     buildTypes {
@@ -43,9 +43,11 @@ dependencies {
     compile('com.mopub:mopub-sdk-native-static:4.16.1@aar') {
         transitive = true
     }
+    compile 'com.google.ads.mediation:mopub:4.15.0.0'
     compile 'com.facebook.android:audience-network-sdk:4.25.0'
-    compile files('src/main/libs/libAdapterSDKMoPub.jar')
-    compile files('src/main/libs/FacebookAdapter.jar')
+    compile 'com.google.ads.mediation:facebook:4.25.0.0'
+    //compile files('src/main/libs/libAdapterSDKMoPub.jar')
+    //compile files('src/main/libs/FacebookAdapter.jar')
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'me.majiajie:swipe-back:1.0.0-alpha2'
 }

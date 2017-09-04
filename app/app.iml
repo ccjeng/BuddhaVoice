@@ -107,11 +107,11 @@
     <orderEntry type="library" exported="" name="firebase-iid-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="transition-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="design-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="mopub-4.15.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-core-ui-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-analytics-impl-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-ads-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-25.2.0" level="project" />
-    <orderEntry type="library" exported="" name="FacebookAdapter" level="project" />
     <orderEntry type="library" exported="" name="play-services-safetynet-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="libAvid-mopub-3.6.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-basement-11.0.4" level="project" />
@@ -120,8 +120,8 @@
     <orderEntry type="library" exported="" name="play-services-base-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-gass-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="mopub-volley-1.1.0" level="project" />
-    <orderEntry type="library" exported="" name="libAdapterSDKMoPub" level="project" />
     <orderEntry type="library" exported="" name="mopub-sdk-banner-4.16.1" level="project" />
+    <orderEntry type="library" exported="" name="facebook-4.25.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-clearcut-11.0.4" level="project" />
     <orderEntry type="library" exported="" name="audience-network-sdk-4.25.0" level="project" />
     <orderEntry type="library" exported="" name="mopub-sdk-native-static-4.16.1" level="project" />
