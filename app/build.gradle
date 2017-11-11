@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 27
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.oddsoft.buddhavoice2"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 41
-        versionName '2.5.6.090317BV'
+        versionCode 42
+        versionName '2.5.7.111117BV'
     }
     buildTypes {
         release {
@@ -26,29 +26,19 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.google.android.gms:play-services-analytics:11.0.4'
-    compile 'com.google.firebase:firebase-core:11.0.4'
-    compile 'com.google.firebase:firebase-ads:11.0.4'
-    releaseCompile 'com.google.firebase:firebase-crash:11.0.4'
+    compile 'com.android.support:appcompat-v7:27.0.0'
+    compile 'com.android.support:design:27.0.0'
+    compile 'com.google.android.gms:play-services-analytics:11.6.0'
+    compile 'com.google.firebase:firebase-core:11.6.0'
+    compile 'com.google.firebase:firebase-ads:11.6.0'
+    releaseCompile 'com.google.firebase:firebase-crash:11.6.0'
     compile('com.mikepenz:aboutlibraries:5.9.4@aar') {
         transitive = true
     }
-    // For banners
-    compile('com.mopub:mopub-sdk-banner:4.16.1@aar') {
-        transitive = true
-    }
-    // For native static (images).
-    compile('com.mopub:mopub-sdk-native-static:4.16.1@aar') {
-        transitive = true
-    }
-    compile 'com.google.ads.mediation:mopub:4.15.0.0'
-    compile 'com.facebook.android:audience-network-sdk:4.25.0'
-    compile 'com.google.ads.mediation:facebook:4.25.0.0'
-    //compile files('src/main/libs/libAdapterSDKMoPub.jar')
-    //compile files('src/main/libs/FacebookAdapter.jar')
-    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.facebook.android:audience-network-sdk:4.26.1'
+    compile 'com.google.ads.mediation:facebook:4.26.1.0'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'me.majiajie:swipe-back:1.0.0-alpha2'
 }
 

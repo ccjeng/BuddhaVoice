@@ -10,12 +10,12 @@ import android.view.MenuItem;
 
 import com.oddsoft.buddhavoice2.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class Prefs extends AppCompatActivity {
 
-	@Bind(R.id.toolbar)
+	@BindView(R.id.toolbar)
 	Toolbar toolbar;
 
 	protected void onCreate(Bundle savedInstanceState) {

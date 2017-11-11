@@ -27,29 +27,29 @@ import com.oddsoft.buddhavoice2.utils.Analytics;
 import com.oddsoft.buddhavoice2.utils.Constant;
 import com.oddsoft.buddhavoice2.view.base.BaseActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "BuddhaVoice";
 
-    @Bind(R.id.navigation)
-    NavigationView navigation;
-
-    @Bind(R.id.drawerlayout)
+    @BindView(R.id.drawerlayout)
     DrawerLayout drawerLayout;
 
-    @Bind(R.id.tabs)
+    @BindView(R.id.navigation)
+    NavigationView navigation;
+
+    @BindView(R.id.tabs)
     TabLayout tabs;
 
-    @Bind(R.id.pager)
+    @BindView(R.id.pager)
     ViewPager pager;
 
     private AdView adView;
     private Analytics ga;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @Override

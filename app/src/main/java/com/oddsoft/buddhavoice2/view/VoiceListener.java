@@ -28,20 +28,20 @@ import com.oddsoft.buddhavoice2.utils.Analytics;
 import com.oddsoft.buddhavoice2.utils.Constant;
 import com.oddsoft.buddhavoice2.view.base.BaseActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class VoiceListener extends BaseActivity {
     private static final String TAG = "VoiceListener";
     private MediaPlayer mp;
 
-    @Bind(R.id.songcontent)
+    @BindView(R.id.songcontent)
     TextView songcontentTextView;
 
-    @Bind(R.id.songinfo)
+    @BindView(R.id.songinfo)
     TextView songinfoTextView;
 
-    @Bind(R.id.main)
+    @BindView(R.id.main)
     NestedScrollView mainScollView;
 
     private String[] songInfo, songInfo1;
@@ -53,10 +53,10 @@ public class VoiceListener extends BaseActivity {
     private AdView adView;
     private Analytics ga;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @Bind(R.id.progress_wheel)
+    @BindView(R.id.progress_wheel)
     ProgressBar progressWheel;
 
     @Override
