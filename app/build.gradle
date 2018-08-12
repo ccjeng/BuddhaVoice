@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.oddsoft.buddhavoice2"
         minSdkVersion 16
-        targetSdkVersion 21
-        versionCode 42
-        versionName '2.5.7.111117BV'
+        targetSdkVersion 27
+        versionCode 43
+        versionName '2.5.8.081218BV'
     }
     buildTypes {
         release {
@@ -25,21 +26,21 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:27.0.0'
-    compile 'com.android.support:design:27.0.0'
-    compile 'com.google.android.gms:play-services-analytics:11.6.0'
-    compile 'com.google.firebase:firebase-core:11.6.0'
-    compile 'com.google.firebase:firebase-ads:11.6.0'
-    releaseCompile 'com.google.firebase:firebase-crash:11.6.0'
-    compile('com.mikepenz:aboutlibraries:5.9.4@aar') {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.google.android.gms:play-services-analytics:16.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-ads:15.0.1'
+    releaseImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
+    implementation('com.mikepenz:aboutlibraries:5.9.4@aar') {
         transitive = true
     }
-    compile 'com.facebook.android:audience-network-sdk:4.26.1'
-    compile 'com.google.ads.mediation:facebook:4.26.1.0'
-    compile 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.facebook.android:audience-network-sdk:4.26.1'
+    implementation 'com.google.ads.mediation:facebook:4.26.1.0'
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'me.majiajie:swipe-back:1.0.0-alpha2'
+    implementation 'me.majiajie:swipe-back:1.0.0-alpha2'
 }
 
 apply plugin: 'com.google.gms.google-services'
